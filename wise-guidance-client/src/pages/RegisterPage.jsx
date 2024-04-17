@@ -1,5 +1,6 @@
 import Layout from "../components/layout/Layout";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -14,10 +15,10 @@ export default function RegisterPage() {
   };
   return (
     <Layout title="Register">
-      <div className="auth-form-container border-black border-2 flex flex-col justify-around p-8 w-1/3 max-h-96">
-        <h1 className="text-center font-bold">Register</h1>
+      <div className="auth-form-container border-black border-2 flex flex-col justify-around p-8 w-1/3 min-h-96">
+        <h1 className="text-center font-bold">Register as a mentee</h1>
         <form
-          className="register-form flex flex-col space-y-4"
+          className="register-form flex flex-col space-y-4 my-3"
           onSubmit={handleSubmit}
         >
           <label htmlFor="name">Name</label>
@@ -58,8 +59,8 @@ export default function RegisterPage() {
             Register
           </button>
         </form>
-        <button className="link-btn underline">
-          Already have an account? Login Here
+        <button className="link-btn underline text-sm">
+          <NavLink to="/login">Already have an account? Login Here</NavLink>
         </button>
       </div>
     </Layout>

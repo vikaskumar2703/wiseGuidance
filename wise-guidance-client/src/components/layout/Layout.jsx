@@ -8,7 +8,7 @@ export default function Layout(props) {
       <Helmet>
         <title>{props.title}</title>
       </Helmet>
-      <Header search={props.search} setSearch={props.setSearch} />
+      <Header />
       <div className="Hero min-h-screen flex justify-center items-center">
         {props.children}
       </div>

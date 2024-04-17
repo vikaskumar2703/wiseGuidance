@@ -1,33 +1,32 @@
 import { NavLink } from "react-router-dom";
-export default function Header({ search, setSearch }) {
+import logo from "./logo.png";
+export default function Header() {
   return (
-    <header className="w-screen flex justify-around py-7 bg-slate-300 drop-shadow-md">
-      <div className="border-black border">logo</div>
-      <div className="search-box">
-        <input
-          type="text"
-          className="rounded-2xl px-2 w-80 py-2"
-          placeholder="Search"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button type="submit" />
+    <header className="w-full flex justify-between py-7 px-8">
+      <div>
+        <NavLink to="/">
+          <img className="max-h-10" src={logo} />
+        </NavLink>
       </div>
+
       <div className="navlinks">
-        <ul className="flex space-x-10">
+        <ul className="flex items-center  space-x-10 font-sans">
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/about">About Us</NavLink>
           </li>
           <li>
-            <NavLink to="/cart">Cart</NavLink>
+            <NavLink to="/resource">Resources</NavLink>
           </li>
           <li>
-            <NavLink to="/about">About</NavLink>
+            <NavLink to="/blog">Blogs</NavLink>
+          </li>
+          <li className="px-4 py-2 bg-purple rounded-xl ">
+            <NavLink to="/browse-mentors" className="text-white font-bold">
+              Mentors
+            </NavLink>
           </li>
           <li>
             <NavLink to="/login">Login</NavLink>
-          </li>
-          <li>
-            <NavLink to="/register">Register</NavLink>
           </li>
         </ul>
       </div>
