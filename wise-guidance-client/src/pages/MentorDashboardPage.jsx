@@ -14,9 +14,9 @@ export default function MentorDashboardPage() {
     console.log(auth?.user?._id);
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_REACT_APP_API}/api/mentorship/get-all-mentees/${
-          auth?.user?._id
-        }`
+        `${
+          import.meta.env.VITE_REACT_APP_API
+        }/api/mentorship/mentor/get-all-mentees/${auth?.user?._id}`
       );
       setMentees(data?.mentor.mentee);
     } catch (error) {

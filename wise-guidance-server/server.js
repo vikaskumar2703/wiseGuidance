@@ -4,6 +4,7 @@ import connectDb from "./config/dbConnection.js";
 import authRoutes from "./routes/authRoute.js";
 import mentorRoutes from "./routes/mentorRoutes.js";
 import menteeRoutes from "./routes/menteeRoutes.js";
+import channelRoutes from "./routes/channelRoutes.js";
 import cors from "cors";
 dotenv.config();
 
@@ -21,8 +22,8 @@ connectDb();
 
 // router middleware
 app.use("/api/auth", authRoutes);
-app.use("/api/mentorship", mentorRoutes);
-app.use("/api/communication", menteeRoutes);
+app.use("/api/mentorship/mentor", mentorRoutes);
+app.use("/api/communication", channelRoutes);
 
 app.get("/", (req, res) => {
   res.send("<h1> Welcome to wiseGuidance website</h1>");

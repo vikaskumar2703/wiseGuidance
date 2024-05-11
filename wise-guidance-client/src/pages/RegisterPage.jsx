@@ -18,7 +18,7 @@ export default function RegisterPage() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/auth/mentee-register",
+        ` ${import.meta.env.VITE_REACT_APP_API}/api/auth/mentee-register`,
         {
           name,
           email,

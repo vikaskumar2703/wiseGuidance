@@ -34,12 +34,11 @@ export default function MentorProfilePage() {
   const getSingleMentor = async () => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_REACT_APP_API}/api/mentorship/get-mentor/${
-          params.slug
-        }`
+        `${
+          import.meta.env.VITE_REACT_APP_API
+        }/api/mentorship/mentor/get-mentor/${params.slug}`
       );
       setMentor(data?.mentor);
-      setMentorId(data?.mentor._id);
       // getSimilarProducts(data?.product.category._id, data?.product._id);
     } catch (error) {
       console.log(error);
@@ -50,9 +49,9 @@ export default function MentorProfilePage() {
   const getAllCourses = async () => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_REACT_APP_API}/api/mentorship/get-courses/${
-          params.slug
-        }`
+        `${
+          import.meta.env.VITE_REACT_APP_API
+        }/api/mentorship/mentor/get-courses/${params.slug}`
       );
 
       if (data.success) {
@@ -68,7 +67,9 @@ export default function MentorProfilePage() {
   const getToken = async () => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_REACT_APP_API}/api/mentorship/client-token`
+        `${
+          import.meta.env.VITE_REACT_APP_API
+        }/api/mentorship/mentor/client-token`
       );
       setClientToken(data?.clientToken);
     } catch (error) {
@@ -86,7 +87,7 @@ export default function MentorProfilePage() {
       setLoading(true);
       const { nonce } = await instance.requestPaymentMethod();
       const { data } = await axios.put(
-        `${import.meta.env.VITE_REACT_APP_API}/api/mentorship/checkout`,
+        `${import.meta.env.VITE_REACT_APP_API}/api/mentorship/mentor/checkout`,
         { courseCost, mentorId, nonce, menteeId: auth?.user?._id }
       );
       if (data && data?.mentee) {

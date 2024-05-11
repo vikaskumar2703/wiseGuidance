@@ -21,11 +21,11 @@ import MentorProfilePage from "./pages/MentorProfilePage";
 import CoursesPage from "./pages/CoursesPage";
 import CreateCoursePage from "./pages/CreateCoursePage";
 import MentorRoutes from "./routes/MentorRoutes";
-import CommunicationPage from "./pages/CommunicationPage";
 import MenteeConfigurePage from "./pages/MenteeConfigurePage";
 import ResourcesPage from "./pages/ResourcesPage";
 import BlogsPage from "./pages/Blogs";
-import MentorCommPage from "./pages/MentorCommPage";
+import MentorCommunicationPage from "./pages/MentorCommunicationPage";
+import MenteeCommunicationPage from "./pages/MenteeCommunicationPage";
 
 function App() {
   return (
@@ -45,10 +45,13 @@ function App() {
             <Route path="/dashboard" element={<PrivateRoutes />}>
               <Route path="mentor" element={<MentorDashboardPage />} />
               <Route path="mentee" element={<MenteeDashboardPage />} />
-              <Route path="mentee/mentorship" element={<CommunicationPage />} />
               <Route
-                path="mentor/mentorship/:id"
-                element={<MentorCommPage />}
+                path="mentee/mentorship"
+                element={<MenteeCommunicationPage />}
+              />
+              <Route
+                path="mentor/mentorship/:menteeId"
+                element={<MentorCommunicationPage />}
               />
 
               <Route

@@ -19,7 +19,9 @@ export default function CreateCoursePage() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/mentorship/create-course",
+        `${
+          import.meta.env.VITE_REACT_APP_API
+        }api/mentorship/mentor/create-course`,
         {
           courseName,
           mentor,

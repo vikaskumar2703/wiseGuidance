@@ -17,7 +17,9 @@ export default function CoursesPage() {
 
       console.log(slug);
       const { data } = await axios.get(
-        `http://localhost:8000/api/mentorship/get-courses/${slug}`
+        `${
+          import.meta.env.VITE_REACT_APP_API
+        }/api/mentorship/mentor/get-courses/${slug}`
       );
 
       if (data.success) {

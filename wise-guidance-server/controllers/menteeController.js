@@ -1,10 +1,10 @@
 import Mentor from "../models/mentorModel.js";
 import Course from "../models/courseModels.js";
 import Mentee from "../models/menteeModels.js";
+import Channel from "../models/channelModels.js";
 import slugify from "slugify";
 import dotenv from "dotenv";
 import braintree from "braintree";
-import generateToken04 from "../utils/zegoServerAssistant.js";
 
 dotenv.config();
 
@@ -69,6 +69,10 @@ export const braintreePaymentController = async (req, res) => {
             },
             { new: true }
           );
+          const channel = await Channel.create({
+            mentor: mentorId,
+            mentee: menteeId,
+          });
           if (mentee)
             res
               .status(201)
@@ -104,42 +108,6 @@ export const getAssignedMentor = async (req, res) => {
       success: false,
       message: " Error in getting single Mentor",
       error: error.message,
-    });
-  }
-};
-
-// get zego cloud client token
-export const chatTokenController = async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const effectiveTimeInSeconds = 3600;
-    const payload = "";
-    const token = generateToken04(
-      parseInt(process.env.APP_ID),
-      userId,
-      process.env.SERVER_SECRET,
-      effectiveTimeInSeconds,
-      payload
-    );
-    if (token) {
-      res.status(201).send({
-        success: true,
-        message: "token generated successfully",
-        token,
-      });
-    } else {
-      res.status(500).send({
-        success: false,
-        message: "Error in token generation ",
-        token,
-      });
-    }
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send({
-      success: false,
-      message: " Error in generating  token ",
-      error,
     });
   }
 };

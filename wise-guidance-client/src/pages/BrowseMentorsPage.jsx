@@ -10,7 +10,9 @@ export default function BrowseMentorsPage() {
   const getAllMentors = async () => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_REACT_APP_API}/api/mentorship/get-mentors`
+        `${
+          import.meta.env.VITE_REACT_APP_API
+        }/api/mentorship/mentor/get-mentors`
       );
       if (data.success) {
         setMentors(data.mentors);

@@ -23,7 +23,7 @@ export default function MentorApplicationPage() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/auth/mentor-register",
+        `${import.meta.env.VITE_REACT_APP_API}/api/auth/mentor-register`,
         {
           name,
           email,
