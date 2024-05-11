@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="flex flex-col bg-slate-300 h-20 justify-center">
+    <footer className="flex flex-col bg-purple text-white h-20 justify-center">
       <h3 className="text-center">
         <span>&copy;</span>Yugantar All rights reserved
       </h3>

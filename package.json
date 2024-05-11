@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "client": "npm run dev --prefix ./wise-guidance-client",
+    "server": "npm run server --prefix ./wise-guidance-server",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "stream-chat": "^8.31.0",
+    "stream-chat-react": "^11.17.0"
+  }
+}
