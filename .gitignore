@@ -1,0 +1,5 @@
+node_modules
+wise-guidance-client/node_modules
+wise-guidance-client/.env
+wise-guidance-server/node_modules
+wise-guidance-server/.env
