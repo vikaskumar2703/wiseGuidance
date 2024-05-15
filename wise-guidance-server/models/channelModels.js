@@ -14,6 +14,12 @@ const channelSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Course",
     },
+    todo: [
+      {
+        task: String,
+        status: { type: Boolean, default: false }, //false : incomplete , true: done
+      },
+    ],
   },
   { timestamps: true }
 );

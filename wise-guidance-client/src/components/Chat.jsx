@@ -19,7 +19,6 @@ const ChatArea = ({ userObj, token, channelId }) => {
   const [channel, setChannel] = useState();
 
   const apiKey = import.meta.env.VITE_STREAM_CHAT_API_KEY;
-  console.log(typeof apiKey);
   const client = useCreateChatClient({
     apiKey,
     tokenOrProvider: token,

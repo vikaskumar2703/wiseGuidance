@@ -26,6 +26,7 @@ import ResourcesPage from "./pages/ResourcesPage";
 import BlogsPage from "./pages/Blogs";
 import MentorCommunicationPage from "./pages/MentorCommunicationPage";
 import MenteeCommunicationPage from "./pages/MenteeCommunicationPage";
+import VideoChat from "./pages/VideoChat";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
 
             <Route path="/dashboard" element={<PrivateRoutes />}>
               <Route path="mentor" element={<MentorDashboardPage />} />
+
               <Route path="mentee" element={<MenteeDashboardPage />} />
               <Route
                 path="mentee/mentorship"
@@ -53,6 +55,7 @@ function App() {
                 path="mentor/mentorship/:menteeId"
                 element={<MentorCommunicationPage />}
               />
+              <Route path="meeting/:callId" element={<VideoChat />} />
 
               <Route
                 path="mentee/update-profile"

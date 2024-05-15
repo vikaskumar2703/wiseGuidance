@@ -68,3 +68,65 @@ export const getChatTokenController = async (req, res) => {
     });
   }
 };
+
+// create to-do
+export const createTodoController = async (req, res) => {
+  try {
+    const { task, channelId } = req.body;
+    if (!task || !channelId) {
+      return res.send({ message: "Task field cannot be empty" });
+    }
+    const { todo } = await Channel.findByIdAndUpdate(
+      channelId,
+      {
+        $addToSet: { todo: { task } },
+      },
+      { new: true }
+    );
+
+    res.status(200).send({
+      success: true,
+      message: "Task Created successfully",
+      todo,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: " Error while creating todo",
+      error,
+    });
+  }
+};
+
+// delete to-do
+export const deleteTodoController = async (req, res) => {
+  try {
+    const { taskId, channelId } = req.body;
+    if (!taskId || !channelId) {
+      return res.send({
+        message: " channel id misiing  ",
+      });
+    }
+    const { todo } = await Channel.findByIdAndUpdate(
+      channelId,
+      {
+        $pull: { todo: { _id: taskId } },
+      },
+      { new: true }
+    );
+
+    res.status(200).send({
+      success: true,
+      message: "Todo updated successfully",
+      todo,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: " Error while updating todo",
+      error,
+    });
+  }
+};
