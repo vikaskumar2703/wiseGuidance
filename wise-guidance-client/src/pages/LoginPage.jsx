@@ -1,10 +1,11 @@
-import Layout from "../components/layout/Layout";
+import Footer from "../components/layout/Footer";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../contexts/authContext";
+import logo from "../assets/logo2.png";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -44,50 +45,64 @@ export default function LoginPage() {
     }
   };
   return (
-    <Layout title="Login">
-      <div className="w-full h-full flex justify-center items-center">
-        <div className="auth-form-container border-black border-2 flex flex-col justify-around p-8 max-w-1/3 h-fit min-h-96">
-          <h1 className="text-center font-bold">Login</h1>
-          <div className="flex justify-around p-3">
+    <div className="w-full h-screen flex ">
+      <div className="left h-full w-1/3 bg-purple opacity-90 flex justify-center">
+        <div className="logo flex items-center">
+          <NavLink to="/">
+            {" "}
+            <img className="" src={logo}></img>{" "}
+          </NavLink>
+          <div className="text-white text-xl font-semibold">
+            wise<br></br> Guidance
+          </div>
+        </div>
+      </div>
+      <div className="right h-full  w-2/3 flex justify-center items-center ">
+        {" "}
+        <div className="auth-form-container  flex flex-col space-y-6 p-8 max-w-1/3 h-fit min-h-96">
+          <h1 className=" text-3xl font-bold">Log in</h1>
+          <div className="flex selector justify-around border-collapse box-border border-b-2 text-sm">
             <button
-              className={`w-1/2  ${
+              className={`w-1/2 p-4  ${
                 userType == "mentee" ? "border-purple border-b-4" : ""
               }`}
               onClick={() => {
                 setUserType("mentee");
               }}
             >
-              Mentee
+              I 'm a Mentee
             </button>
             <button
-              className={`w-1/2  ${
+              className={`w-1/2 p-4 ${
                 userType != "mentee" ? "border-purple border-b-4" : ""
               }`}
               onClick={() => {
                 setUserType("mentor");
               }}
             >
-              Mentor
+              I 'm a Mentor
             </button>
           </div>
           <form
-            className="login-form flex flex-col space-y-4"
+            className="login-form flex flex-col space-y-1 font-semibold"
             onSubmit={handleSubmit}
           >
             <label htmlFor="email">Email</label>
             <input
-              className="border"
+              className="border p-1 rounded-md"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
               id="email"
               name="email"
-              placeholder="youremail@gmail.com"
             ></input>
-            <label htmlFor="password">Password</label>
+            <br></br>
+            <label htmlFor="password" className="">
+              Password
+            </label>
             <input
-              className="border"
+              className="border-gray-200 p-1 rounded-md"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -95,23 +110,28 @@ export default function LoginPage() {
               type="password"
               id="password"
               name="password"
-              placeholder="*******"
             ></input>
-            <button type="submit" className="border bg-blue-600 text-white">
+            <br></br>
+            <button
+              type="submit"
+              className="border bg-purple p-3 rounded-xl text-white"
+            >
               Log In
             </button>
           </form>
-          <button className="link-btn mt-4 underline text-sm">
-            <NavLink to="/register">
-              Don't have an account ? Register Here as a Mentee
-            </NavLink>
-          </button>
-          <p className="w-full text-center">or</p>
-          <button className="link-btn  text-sm underline">
-            <NavLink to="/mentor-apply">Apply to be a Mentor</NavLink>
-          </button>
+          <div className="flex justify-center flex-col">
+            <button className="link-btn mt-4 underline text-sm">
+              <NavLink to="/register">
+                Don't have an account ? Register Here as a Mentee
+              </NavLink>
+            </button>
+            <p className="w-full text-center">or</p>
+            <button className="link-btn  text-sm underline">
+              <NavLink to="/mentor-apply">Apply to be a Mentor</NavLink>
+            </button>
+          </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 }

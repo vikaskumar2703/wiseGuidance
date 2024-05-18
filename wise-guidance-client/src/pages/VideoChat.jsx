@@ -14,7 +14,6 @@ import {
 } from "@stream-io/video-react-sdk";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { useNavigate, useParams } from "react-router-dom";
-import slugify from "slugify";
 
 import "../App.css";
 import useAuth from "../contexts/authContext";

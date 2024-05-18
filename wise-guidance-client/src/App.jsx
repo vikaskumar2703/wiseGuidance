@@ -27,6 +27,7 @@ import BlogsPage from "./pages/Blogs";
 import MentorCommunicationPage from "./pages/MentorCommunicationPage";
 import MenteeCommunicationPage from "./pages/MenteeCommunicationPage";
 import VideoChat from "./pages/VideoChat";
+import MentorMentorshipPage from "./pages/MentorMentorshipPage";
 
 function App() {
   return (
@@ -50,6 +51,10 @@ function App() {
               <Route
                 path="mentee/mentorship"
                 element={<MenteeCommunicationPage />}
+              />
+              <Route
+                path="mentor/mentorship"
+                element={<MentorMentorshipPage />}
               />
               <Route
                 path="mentor/mentorship/:menteeId"

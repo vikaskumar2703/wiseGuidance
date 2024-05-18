@@ -8,6 +8,9 @@ export default {
       colors: {
         purple: "#7837D8",
       },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+      },
     },
   },
   plugins: [flowbite.plugin()],

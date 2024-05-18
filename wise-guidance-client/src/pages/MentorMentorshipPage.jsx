@@ -5,7 +5,7 @@ import useAuth from "../contexts/authContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function MentorDashboardPage() {
+export default function MentorMentorshipPage() {
   const [auth, setAuth] = useAuth();
   const [mentees, setMentees] = useState([]);
   const navigate = useNavigate();
@@ -34,17 +34,6 @@ export default function MentorDashboardPage() {
           <MentorMenu />
         </div>
         <div className="col-span-3 text-center p-5 flex flex-col items-start">
-          <h1 className="">
-            Mentee Details full, Mentor Details , Review Mentor
-          </h1>
-          <div className="border-2 max-w-fit px-10 py-5 space-y-4 text-start">
-            <h1 className="font-bold text-xl">Mentor Details</h1>
-            <h2 className="text-2xl"> Name : {auth?.user?.name}</h2>
-            <h2 className="text-2xl"> Email : {auth?.user?.email}</h2>
-            <h2 className="text-2xl"> Phone : {auth?.user?.phone}</h2>
-            <h2 className="text-2xl"> Mentees : {auth?.user?.mentee}</h2>
-          </div>
-
           <div className="border-2 max-w-fit px-10 py-5 space-y-4 text-start">
             <h1 className="font-bold text-xl">Mentees :</h1>
             {mentees.map((m) => (

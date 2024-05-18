@@ -7,7 +7,10 @@ export const MentorMenu = () => {
         <NavLink to="/dashboard/mentor">Workspace</NavLink>
       </h1>
       <div className="admin-links flex flex-col m-10">
-        <NavLink className="p-3 border border-collapse font-semibold  hover:bg-gray-300 ">
+        <NavLink
+          className="p-3 border border-collapse font-semibold  hover:bg-gray-300 "
+          to="/dashboard/mentor/mentorship/"
+        >
           Mentorship
         </NavLink>
         <NavLink

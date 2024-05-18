@@ -5,6 +5,8 @@ import useAuth from "../contexts/authContext";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import ChatArea from "../components/Chat";
+import { Modal } from "flowbite-react";
+import { toast } from "react-toastify";
 
 export default function MentorCommunicationPage() {
   const params = useParams();
@@ -14,6 +16,11 @@ export default function MentorCommunicationPage() {
   const [chatToken, setChatToken] = useState("");
   const [todos, setTodos] = useState([]);
   const [task, setTask] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  //schedule meeting states
+  const [title, setTitle] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("10:00");
 
   const getChatToken = async () => {
     try {
@@ -70,6 +77,20 @@ export default function MentorCommunicationPage() {
     }
   };
 
+  const scheduleMeeeting = async () => {
+    try {
+      const { data } = await axios.post(
+        `${
+          import.meta.env.VITE_REACT_APP_API
+        }/api/communication/schedule-meeting`,
+        { channelId: channel._id, title, date, time }
+      );
+      toast.success(data?.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Layout title=" Dashboard">
       <div className="grid grid-cols-4 grid-rows-1 w-full min-h-screen">
@@ -86,9 +107,56 @@ export default function MentorCommunicationPage() {
               >
                 Join Meeting
               </Link>{" "}
-              <Link className="bg-purple text-white p-4 w-48 rounded-xl font-semibold">
+              <Link
+                className="bg-purple text-white p-4 w-48 rounded-xl font-semibold"
+                onClick={() => setOpenModal(true)}
+              >
                 Schedule Meeting
               </Link>
+              <Modal show={openModal} onClose={() => setOpenModal(false)}>
+                <Modal.Header>Schedule Meeting</Modal.Header>
+                <form className="space-y-2">
+                  <Modal.Body>
+                    <div className="space-y-2 flex flex-col ">
+                      <label htmlFor="title">Title</label>
+                      <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                      />
+                      <label htmlFor="date">Date</label>
+                      <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                      />
+                      <label htmlFor="time">Time</label>
+                      <input
+                        type="time"
+                        id="time"
+                        name="time"
+                        value={time}
+                        onChange={(e) => setTime(e.target.value)}
+                      />
+                    </div>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <button
+                      onClick={() => {
+                        setOpenModal(false);
+                        scheduleMeeeting();
+                      }}
+                      className="bg-purple text-white p-2 rounded-lg"
+                    >
+                      Schedule Meeting
+                    </button>
+                  </Modal.Footer>{" "}
+                </form>
+              </Modal>
             </div>
             <div className="col-start-1 row-start-2 border border-black">
               <div className="flex">

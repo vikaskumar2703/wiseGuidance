@@ -130,3 +130,40 @@ export const deleteTodoController = async (req, res) => {
     });
   }
 };
+
+// send scheduled meetings message
+export const scheduleMeetingController = async (req, res) => {
+  try {
+    const { channelId, title, date, time } = req.body;
+    if (!channelId || !title || !date || !time) {
+      return res.status(500).send({ message: "All fields are mandatory" });
+    }
+    const client = StreamChat.getInstance(
+      process.env.API_KEY,
+      process.env.API_SECRET
+    );
+    const channel = client.channel("messaging", channelId);
+    const text = `Meeting has been scheduled by your mentor on ${date} at ${time} for ${title}. Click on the Join meeting at the respective time `;
+    const message = {
+      text,
+      user: { id: "sysId", name: "System" },
+      silent: true,
+      type: "system",
+      pinned: true,
+      pin_expires: `${date}T${time}:00Z`,
+    };
+    await channel.sendMessage(message);
+
+    res.status(200).send({
+      success: true,
+      message: "Meeting scheduled successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: " Error while scheduling meeting",
+      error,
+    });
+  }
+};
