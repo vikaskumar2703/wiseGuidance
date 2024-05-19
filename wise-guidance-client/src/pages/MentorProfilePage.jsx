@@ -9,6 +9,7 @@ import { createCourseController } from "../../../wise-guidance-server/controller
 import { Tabs } from "flowbite-react";
 import { Flowbite } from "flowbite-react";
 import photo from "../assets/photo.png";
+import review from "../assets/review.png";
 
 const customTheme = {
   button: {
@@ -116,7 +117,7 @@ export default function MentorProfilePage() {
   return (
     <Layout title="Mentor Profile">
       <div className=" grid grid-cols-3 p-20 gap-12  bg-slate-100 ">
-        <div className="mentorCard  col-span-2  bg-white border rounded-xl relative ">
+        <div className="mentorCard  col-span-2  bg-white border rounded-xl min-h-[80vh] relative ">
           <div className="gradient bg-gradient-to-r from-[#D3BAF4] to-[#FFD9F3] h-1/3 rounded-t-xl"></div>
 
           <div className="flex flex-col  absolute top-[100px] left-14  space-y-4">
@@ -144,7 +145,7 @@ export default function MentorProfilePage() {
             <p>{mentor.experience} years of experience</p>
           </div>
         </div>
-        <div className=" border rounded-2xl box-border  h-fit bg-white">
+        <div className=" courseCard border rounded-2xl box-border  h-fit bg-white">
           <h1 className="text-xl  py-6 font-bold mb-4 text-center rounded-t-2xl border-b border">
             Mentorship Plans
           </h1>
@@ -203,6 +204,19 @@ export default function MentorProfilePage() {
               ))}
             </Tabs>
           </div>
+        </div>
+        <div className="col-span-2 bg-white rounded-2xl space-y-4  px-14 py-6">
+          <h1 className="text-xl   font-bold  rounded-t-2xl ">Reviews</h1>
+          <img src={review} />
+          <p>
+            I'm a math teacher, that wanted to switch to Data Science. Anastasia
+            took the time to understand mybackground and what kind of jobs I was
+            interested in. She didn't just focus on getting me any job; she
+            helped me figure out where I wanted to go in the world of data
+            science. Our talks were really helpful. We discussed my skills, what
+            I liked, and what I didn't and through these talks and some
+            exercises, I
+          </p>
         </div>
       </div>
     </Layout>
