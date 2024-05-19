@@ -14,6 +14,8 @@ export default function MentorApplicationPage() {
   const [answer, setAnswer] = useState("");
   const [skills, setSkills] = useState([]);
   const [designation, setDesignation] = useState("");
+  const [description, setDescription] = useState("");
+
   const [experience, setExperience] = useState("");
   const [skill, setSkill] = useState("");
   const [domain, setDomain] = useState("");
@@ -31,6 +33,7 @@ export default function MentorApplicationPage() {
           phone,
           domain,
           answer,
+          description,
           organisation,
           skills,
           designation,
@@ -50,144 +53,170 @@ export default function MentorApplicationPage() {
   };
   return (
     <Layout title="Register">
-      <div className="auth-form-container border-black border-2 flex flex-col justify-around p-8 w-1/3 ">
-        <h1 className="text-center font-bold">Register</h1>
-        <form
-          className="register-form flex flex-col space-y-4"
-          onSubmit={handleSubmit}
-        >
-          <label htmlFor="name">Name</label>
-          <input
-            value={name}
-            className="border"
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-            id="name"
-            name="name"
-            placeholder="Full Name"
-          ></input>
-          <label htmlFor="email">Email</label>
-          <input
-            value={email}
-            className="border"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            id="email"
-            name="email"
-            placeholder="youremail@gmail.com"
-          ></input>
-          <label htmlFor="password">Password</label>
-          <input
-            value={password}
-            className="border"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            type="password"
-            id="password"
-            name="password"
-            placeholder="*******"
-          ></input>
-          <label htmlFor="phone">Phone No.</label>
-          <input
-            value={phone}
-            className="border"
-            onChange={(e) => {
-              setPhone(e.target.value);
-            }}
-            id="phone"
-            name="phone"
-            placeholder="Phone no."
-          ></input>
-
-          <label htmlFor="Organisation">Organisation</label>
-          <input
-            value={organisation}
-            className="border"
-            onChange={(e) => {
-              setOrganisation(e.target.value);
-            }}
-            id="Organisation"
-            name="Organisation"
-            placeholder="Name of your Organisation"
-          ></input>
-          <label htmlFor="Domain">Domain</label>
-          <input
-            value={domain}
-            className="border"
-            onChange={(e) => {
-              setDomain(e.target.value);
-            }}
-            id="Domain"
-            name="Domain"
-            placeholder="Name of your Domain"
-          ></input>
-          <label htmlFor="Designation">Designation</label>
-          <input
-            value={designation}
-            className="border"
-            onChange={(e) => {
-              setDesignation(e.target.value);
-            }}
-            id="Designation"
-            name="Designation"
-            placeholder="Full Designation"
-          ></input>
-          <label htmlFor="Experience">Experience</label>
-          <input
-            value={experience}
-            className="border"
-            onChange={(e) => {
-              setExperience(e.target.value);
-            }}
-            id="Experience"
-            name="Experience"
-            placeholder="Full Experience"
-          ></input>
-          <label htmlFor="Skills">Skills</label>
-
-          <input
-            value={skill}
-            className="border"
-            onChange={(e) => {
-              setSkill(e.target.value);
-            }}
-            id="Skills"
-            name="Skills"
-            placeholder="Full Skills"
-          ></input>
-          <button
-            className="border w-fit bg-blue-600 text-white"
-            onClick={() => {
-              setSkill("");
-              setSkills([...skills, skill]);
-            }}
+      <div className="flex justify-center my-2 mb-12">
+        <div className="auth-form-container flex flex-col space-y-6 p-8 w-1/3 ">
+          <h1 className="text-left text-3xl font-bold ">Register</h1>
+          <form
+            className="register-form flex flex-col font-semibold"
+            onSubmit={handleSubmit}
           >
-            Add
+            <label htmlFor="name">Name</label>
+            <input
+              value={name}
+              className="border p-1 rounded-md"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              id="name"
+              name="name"
+            ></input>
+            <label htmlFor="email" className="mt-3">
+              Email
+            </label>
+            <input
+              value={email}
+              className="border p-1 rounded-md"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              id="email"
+              name="email"
+            ></input>
+            <label htmlFor="password" className="mt-3">
+              Password
+            </label>
+            <input
+              value={password}
+              className="border-gray-200 p-1 rounded-md"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              type="password"
+              id="password"
+              name="password"
+            ></input>
+            <label htmlFor="phone" className="mt-3">
+              Phone No.
+            </label>
+            <input
+              value={phone}
+              className="border p-1 rounded-md"
+              onChange={(e) => {
+                setPhone(e.target.value);
+              }}
+              id="phone"
+              name="phone"
+            ></input>
+
+            <label htmlFor="Organisation" className="mt-3">
+              Organisation
+            </label>
+            <input
+              value={organisation}
+              className="border p-1 rounded-md"
+              onChange={(e) => {
+                setOrganisation(e.target.value);
+              }}
+              id="Organisation"
+              name="Organisation"
+            ></input>
+            <label htmlFor="Domain" className="mt-3">
+              Domain
+            </label>
+            <input
+              value={domain}
+              className="border p-1 rounded-md"
+              onChange={(e) => {
+                setDomain(e.target.value);
+              }}
+              id="Domain"
+              name="Domain"
+            ></input>
+            <label htmlFor="Designation" className="mt-3">
+              Designation
+            </label>
+            <input
+              value={designation}
+              className="border p-1 rounded-md"
+              onChange={(e) => {
+                setDesignation(e.target.value);
+              }}
+              id="Designation"
+              name="Designation"
+            ></input>
+            <label htmlFor="Description" className="mt-3">
+              Tell us about yourself, interests
+            </label>
+            <textarea
+              value={description}
+              rows={4}
+              className="border-gray-200 p-1 rounded-md"
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+              id="Description"
+              name="Description"
+            ></textarea>
+            <label htmlFor="Experience" className="mt-3">
+              Experience
+            </label>
+            <input
+              value={experience}
+              className="border p-1 rounded-md"
+              onChange={(e) => {
+                setExperience(e.target.value);
+              }}
+              id="Experience"
+              name="Experience"
+            ></input>
+            <label htmlFor="Skills" className="mt-3">
+              Skills
+            </label>
+
+            <input
+              value={skill}
+              className="border p-1 rounded-md"
+              onChange={(e) => {
+                setSkill(e.target.value);
+              }}
+              id="Skills"
+              name="Skills"
+            ></input>
+            <button
+              className="border w-fit bg-purple px-2 p-1 rounded-md text-white mt-1"
+              onClick={() => {
+                setSkill("");
+                setSkills([...skills, skill]);
+              }}
+            >
+              Add
+            </button>
+            <pre>{skills}</pre>
+            <label htmlFor="answer" className="mt-3">
+              What is your favourite sport?{" "}
+            </label>
+            <input
+              value={answer}
+              className="border"
+              onChange={(e) => {
+                setAnswer(e.target.value);
+              }}
+              id="answer"
+              name="answer"
+            ></input>
+            <br></br>
+            <button
+              type="submit"
+              className="border bg-purple p-3 rounded-xl text-white"
+            >
+              Apply as Mentor
+            </button>
+          </form>
+
+          <button className="link-btn underline text-center text-sm">
+            <NavLink to="/login"> Already have an account? Login Here</NavLink>
           </button>
-          <pre>{skills}</pre>
-          <label htmlFor="answer">What is your favourite sport? </label>
-          <input
-            value={answer}
-            className="border"
-            onChange={(e) => {
-              setAnswer(e.target.value);
-            }}
-            id="answer"
-            name="answer"
-            placeholder="mention your favourite sport"
-          ></input>
-          <button type="submit" className="border bg-blue-600 text-white">
-            Register
-          </button>
-        </form>
-        <NavLink to="/login">
-          <button className="link-btn underline">
-            Already have an account? Login Here
-          </button>
-        </NavLink>
+        </div>
       </div>
     </Layout>
   );

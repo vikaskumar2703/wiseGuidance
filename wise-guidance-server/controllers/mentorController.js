@@ -26,12 +26,13 @@ export const getMentorsController = async (req, res) => {
 export const getSingleMentorController = async (req, res) => {
   try {
     const mentor = await Mentor.findOne({ slug: req.params.slug });
-
-    res.status(201).send({
-      success: true,
-      message: "Single Mentor listed successfully",
-      mentor,
-    });
+    if (mentor) {
+      res.status(201).send({
+        success: true,
+        message: "Single Mentor listed successfully",
+        mentor,
+      });
+    }
   } catch (error) {
     console.log(error);
     return res.status(500).send({

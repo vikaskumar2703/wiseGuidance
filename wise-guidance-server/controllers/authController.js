@@ -66,6 +66,7 @@ export const MentorRegisterController = async (req, res) => {
       phone,
       domain,
       answer,
+      description,
       organisation,
       skills,
       designation,
@@ -80,6 +81,7 @@ export const MentorRegisterController = async (req, res) => {
       !phone ||
       !answer ||
       !domain ||
+      !description ||
       !organisation ||
       !skills ||
       !designation ||
@@ -102,6 +104,7 @@ export const MentorRegisterController = async (req, res) => {
       password: hashedPassword,
       phone,
       domain,
+      description,
       slug: slugify(name),
       answer,
       organisation,

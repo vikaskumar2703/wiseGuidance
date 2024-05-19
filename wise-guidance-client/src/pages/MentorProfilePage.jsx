@@ -7,6 +7,8 @@ import useAuth from "../contexts/authContext";
 import DropIn from "braintree-web-drop-in-react";
 import { toast } from "react-toastify";
 import { createCourseController } from "../../../wise-guidance-server/controllers/mentorController";
+import { Tabs } from "flowbite-react";
+import photo from "../assets/photo.png";
 
 export default function MentorProfilePage() {
   const params = useParams();
@@ -78,7 +80,7 @@ export default function MentorProfilePage() {
   };
 
   useEffect(() => {
-    getToken();
+    if (auth.token) getToken();
   }, [auth?.token]);
 
   //handle payments
@@ -104,72 +106,90 @@ export default function MentorProfilePage() {
   };
   return (
     <Layout title="Mentor Profile">
-      <div className="h-full flex items-center justify-center border-black border p-14">
-        <div className="w-full h-full">
-          <div className="flex flex-col  text-center  ">
-            <h1 className="text-xl font-bold underline mb-4">Mentor Profile</h1>
-            <div className="flex justify-between">
-              <div className="w-1/2 flex flex-col text-left">
-                <h1 className="text-xl font-bold mb-4">Mentor Details</h1>
-                <h1>Name:{mentor.name}</h1>
-                <h2>Organisation:{mentor.organisation}</h2>
-                <h2>Years of Experience: {mentor.experience}</h2>
-                <h2>Designation{mentor.designation}</h2>
-                <p>Skills : {mentor.skills}</p>
-              </div>
-              <div className="w-1/2 ml-4">
-                <h1 className="text-xl font-bold  mb-4">Courses</h1>
-                {courses.map((c) => (
-                  <div
-                    key={c._id}
-                    className="border-black border-2 m-4 space-y-2 text-left p-2"
-                  >
-                    <h1>Name of Plan: {c.courseName}</h1>
-                    <p>Description: {c.description}</p> <p>Cost: {c.cost}</p>
-                    <p>Calls per month: {c.calls}</p>
-                    {auth.token ? (
-                      <div className="mt-2 payment">
-                        {!clientToken ? (
-                          ""
-                        ) : (
-                          <>
-                            <DropIn
-                              options={{
-                                authorization: clientToken,
-                              }}
-                              onInstance={(instance) => setInstance(instance)}
-                            />
+      <div className="h-screen grid grid-cols-3 p-20 gap-8 ">
+        <div className="mentorCard  col-span-2 border rounded-xl relative ">
+          <div className="gradient bg-gradient-to-r from-[#D3BAF4] to-[#FFD9F3] h-1/3 rounded-t-xl"></div>
 
-                            <button
-                              className="btn btn-primary"
-                              onClick={() => handlePayment(c.cost, c.mentor)}
-                              disabled={
-                                loading || !instance || !auth?.user?.address
-                              }
-                            >
-                              {loading ? "Processing ...." : "Make Payment"}
-                            </button>
-                          </>
-                        )}
-                      </div>
+          <div className="flex flex-col  absolute top-[100px] left-14 space-y-4">
+            <img src={photo} className="h-40 w-36 "></img>
+            <h1 className="text-xl font-bold mb-4">{mentor.name}</h1>
+            <p className="font-semibold">
+              {mentor.designation} at {mentor.organisation}
+            </p>
+            <p className="text-sm  ">{mentor.description}</p>
+
+            {/* <p>
+           
+              Skills :
+              {mentor
+                ? mentor.skills.map((s, index) => (
+                    <span
+                      key={index}
+                      className="border border-black px-2 text-sm p-1 rounded-3xl mx-2"
+                    >
+                      {s}
+                    </span>
+                  ))
+                : ""}
+            </p> */}
+            <p>{mentor.experience} years of experience</p>
+          </div>
+        </div>
+        <div className=" border-black border h-fit p-6">
+          <h1 className="text-xl font-bold mb-4 text-center">
+            Mentorship Plans
+          </h1>
+          <Tabs aria-label="Default tabs" style="fullWidth" className="border">
+            {courses.map((c) => (
+              <Tabs.Item
+                active
+                title={c.courseName}
+                key={c._id}
+                onFocus="border-black"
+              >
+                <p>Description: {c.description}</p> <p>Cost: {c.cost}</p>
+                <p>Calls per month: {c.calls}</p>
+                {auth.token ? (
+                  <div className="mt-2 payment">
+                    {!clientToken ? (
+                      ""
                     ) : (
-                      <button
-                        className="border p-2 rounded-lg bg-purple text-white"
-                        onClick={
-                          () => navigate("/login")
-                          // , {
-                          //   state: "/",
-                          // })
-                        }
-                      >
-                        Please Login to checkout
-                      </button>
+                      <>
+                        <DropIn
+                          options={{
+                            authorization: clientToken,
+                          }}
+                          onInstance={(instance) => setInstance(instance)}
+                        />
+
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => handlePayment(c.cost, c.mentor)}
+                          disabled={
+                            loading || !instance || !auth?.user?.address
+                          }
+                        >
+                          {loading ? "Processing ...." : "Make Payment"}
+                        </button>
+                      </>
                     )}
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
+                ) : (
+                  <button
+                    className="border p-2 rounded-lg bg-purple text-white"
+                    onClick={
+                      () => navigate("/login")
+                      // , {
+                      //   state: "/",
+                      // })
+                    }
+                  >
+                    Please Login to checkout
+                  </button>
+                )}
+              </Tabs.Item>
+            ))}
+          </Tabs>
         </div>
       </div>
     </Layout>
