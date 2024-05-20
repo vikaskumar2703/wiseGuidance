@@ -32,7 +32,7 @@ export default function BrowseMentorsPage() {
 
   return (
     <Layout title="Browse Mentors">
-      <div className="h-full flex items-center justify-center -z-10 bg-slate-100   p-14">
+      <div className="h-full flex items-center justify-center -z-10 bg-lpink   p-14">
         <div className="w-full h-full flex flex-col items-center">
           <div className="mb-10 rounded-xl  border-2 w-1/2 flex justify-between bg-white items-baseline">
             <input

@@ -47,7 +47,7 @@ export default function CreateCoursePage() {
   };
   return (
     <Layout title="Create Course">
-      <div className="form w-full h-screen flex justify-center p-16 bg-slate-200 ">
+      <div className="form w-full h-screen flex justify-center p-16 bg-lpink ">
         <form
           onSubmit={handleSubmit}
           className="flex flex-col space-y-6 h-fit rounded-xl p-10 bg-white font-semibold"

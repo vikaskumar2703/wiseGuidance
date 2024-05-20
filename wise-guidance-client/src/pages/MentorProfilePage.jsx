@@ -116,7 +116,7 @@ export default function MentorProfilePage() {
   };
   return (
     <Layout title="Mentor Profile">
-      <div className=" grid grid-cols-3 p-20 gap-12  bg-slate-100 ">
+      <div className=" grid grid-cols-3 p-20 gap-12  bg-lpink ">
         <div className="mentorCard  col-span-2  bg-white border rounded-xl min-h-[80vh] relative ">
           <div className="gradient bg-gradient-to-r from-[#D3BAF4] to-[#FFD9F3] h-1/3 rounded-t-xl"></div>
 

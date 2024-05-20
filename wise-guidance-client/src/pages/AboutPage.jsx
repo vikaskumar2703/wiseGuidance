@@ -2,7 +2,7 @@ import Layout from "../components/layout/Layout";
 export default function AboutPage() {
   return (
     <Layout title="About Us">
-      {/* <div className="h-full flex items-center justify-center border-black border bg-slate-200">
+      {/* <div className="h-full flex items-center justify-center border-black border bg-lpink">
        */}
       <section className="flex flex-col items-center text-center py-16 px-4 sm:px-8 lg:px-64 m-16 relative">
         <div className="bg-purple h-80 w-80 rounded-full absolute top-48 -left-[260px]"></div>
