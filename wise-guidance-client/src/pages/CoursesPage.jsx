@@ -9,7 +9,6 @@ export default function CoursesPage() {
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
-  const [mentorId, setMentorId] = useState("");
 
   const getAllCourses = async () => {
     try {
@@ -35,27 +34,41 @@ export default function CoursesPage() {
   }, [auth?.user?.slug]);
 
   return (
-    <Layout title="My Courses">
-      <h1 className="font-bold"> Hi , All your courses will appear here</h1>
-      {courses.map((c) => (
-        <div key={c._id} className="border-black border-2 m-4">
-          <h1>Name of Plan: {c.courseName}</h1>
-          <p>Description: {c.description}</p> <p>Cost: {c.cost}</p>
-          <p>Calls per month: {c.calls}</p>
-          <button className="border bg-red-500 text-white p-2">
-            Update Course
+    <Layout title="My Courses ">
+      <div className="p-8">
+        <h1 className="font-bold"> Hi , All your courses will appear here</h1>
+        <div className="flex">
+          {courses.map((c) => (
+            <div
+              key={c._id}
+              className=" rounded-2xl border-2 flex flex-col  items-center m-4 pb-4 "
+            >
+              <div className="border-b w-full text-center  text-xl   font-bold mb-4  rounded-t-2xl">
+                <h1 className="py-6 "> {c.courseName}</h1>
+              </div>
+              <div className="p-8 space-y-4 ">
+                <p>Description: {c.description}</p> <p>Cost: ${c.cost}</p>
+                <p>Calls per month: {c.calls}</p>{" "}
+                <p>Duration of course : {c.duration}</p>
+              </div>
+              <button className="border p-2 rounded-lg bg-purple font-semibold text-white">
+                Update Course
+              </button>
+            </div>
+          ))}
+        </div>
+        <br></br>
+        <div className="w-full text-center">
+          <button
+            className="border bg-red-500 text-center rounded-xl font-semibold text-white p-4 "
+            onClick={() => {
+              navigate("create-course");
+            }}
+          >
+            Create New Mentorship Plan
           </button>
         </div>
-      ))}
-      <br></br>
-      <button
-        className="border bg-blue-600 text-white p-2 rounded"
-        onClick={() => {
-          navigate("create-course");
-        }}
-      >
-        Create New Mentorship Plan
-      </button>
+      </div>
     </Layout>
   );
 }

@@ -14,6 +14,7 @@ export default function CreateCoursePage() {
   const [cost, setCost] = useState("");
   const [skills, setSkills] = useState(["ai", "ml"]);
   const [calls, setCalls] = useState("");
+  const [duration, setDuration] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +31,7 @@ export default function CreateCoursePage() {
           cost,
           skills,
           calls,
+          duration,
         }
       );
       if (res.data.success) {
@@ -45,35 +47,70 @@ export default function CreateCoursePage() {
   };
   return (
     <Layout title="Create Course">
-      <form onSubmit={handleSubmit} className="flex flex-col space-y-4 m-10">
-        <input
-          value={courseName}
-          className="border"
-          onChange={(e) => {
-            setCourseName(e.target.value);
-          }}
-          id="courseName"
-          placeholder="Write Course Name"
-        ></input>
-        <input
-          value={description}
-          className="border"
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
-          id="description"
-          placeholder="Write description"
-        ></input>{" "}
-        <input
-          value={cost}
-          className="border"
-          onChange={(e) => {
-            setCost(e.target.value);
-          }}
-          id="cost"
-          placeholder="cost"
-        ></input>{" "}
-        {/* <input
+      <div className="form w-full h-screen flex justify-center p-16 bg-slate-200 ">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col space-y-6 h-fit rounded-xl p-10 bg-white font-semibold"
+        >
+          <div className="flex ">
+            <label>Select a Course name : </label>
+            <div className="ml-2 space-x-3">
+              <input
+                type="radio"
+                id="short"
+                name="courseName"
+                value="Short Term"
+                onChange={(e) => {
+                  setCourseName(e.target.value);
+                }}
+              />
+              <label htmlFor="short">Short Term</label>
+              <input
+                type="radio"
+                id="medium"
+                name="courseName"
+                value="Medium Term"
+                onChange={(e) => {
+                  setCourseName(e.target.value);
+                }}
+              />
+              <label htmlFor="medium">Medium Term</label>
+              <input
+                type="radio"
+                id="long"
+                name="courseName"
+                value="Long Term"
+                onChange={(e) => {
+                  setCourseName(e.target.value);
+                }}
+              />
+              <label htmlFor="long">Long Term</label>
+            </div>
+          </div>{" "}
+          <div className="flex">
+            <label htmlFor="description">Description : </label>
+            <textarea
+              rows={2}
+              value={description}
+              className="border-gray-200 p-1 rounded-md ml-2 flex-grow"
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+              id="description"
+            ></textarea>{" "}
+          </div>
+          <div className="flex">
+            <label htmlFor="cost">Cost : </label>
+            <input
+              value={cost}
+              className="border  p-1 ml-2 flex-grow rounded-md"
+              onChange={(e) => {
+                setCost(e.target.value);
+              }}
+              id="cost"
+            ></input>{" "}
+          </div>
+          {/* <input
           value={skills}
           className="border"
           onChange={(e) => {
@@ -81,20 +118,37 @@ export default function CreateCoursePage() {
           }}
           id="courseName"
           placeholder="Write Course Name"
-        ></input>{" "} */}
-        <input
-          value={calls}
-          className="border"
-          onChange={(e) => {
-            setCalls(e.target.value);
-          }}
-          id="calls"
-          placeholder="Write Calls per month"
-        ></input>
-        <button type="submit" className="border bg-blue-600 text-white">
-          Create Course
-        </button>
-      </form>
+        ></input>{" "} */}{" "}
+          <div className="flex">
+            <label htmlFor="calls">Calls per month : </label>
+            <input
+              value={calls}
+              className="border  p-1 ml-2 flex-grow rounded-md"
+              onChange={(e) => {
+                setCalls(e.target.value);
+              }}
+              id="calls"
+            ></input>
+          </div>
+          <div className="flex">
+            <label htmlFor="duration">Duration : </label>
+            <input
+              value={duration}
+              className="border  p-1 ml-2 flex-grow rounded-md"
+              onChange={(e) => {
+                setDuration(e.target.value);
+              }}
+              id="duration"
+            ></input>{" "}
+          </div>
+          <button
+            type="submit"
+            className="border bg-purple p-3 rounded-xl text-white"
+          >
+            Create Course
+          </button>
+        </form>
+      </div>
     </Layout>
   );
 }
