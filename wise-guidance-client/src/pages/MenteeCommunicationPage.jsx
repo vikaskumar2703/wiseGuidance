@@ -74,7 +74,7 @@ export default function MenteeCommunicationPage() {
 
   return (
     <Layout title=" Dashboard">
-      <div className="grid grid-cols-4 grid-rows-1 w-full h-screen">
+      <div className="grid grid-cols-4 grid-rows-1 w-full h-screen  mb-14">
         <div className="text-center ">
           <MenteeMenu />
         </div>

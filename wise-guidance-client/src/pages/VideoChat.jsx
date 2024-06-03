@@ -65,28 +65,24 @@ function VideoChat() {
     return (
       <>
         <div className="container flex justify-center items-center h-screen ">
-          <div className="form-container flex flex-col space-y-4">
-            <input
-              placeholder="Enter User Name"
-              value={userName}
-              onChange={(e) => {
-                setUserName(e.target.value);
-              }}
-            />
-            <input
-              placeholder="Enter User Token"
-              value={token}
-              onChange={(e) => {
-                setToken(e.target.value);
-              }}
-            />
-            <input
-              placeholder="Enter Call id"
-              value={callId}
-              onChange={(e) => {
-                setCallId(e.target.value);
-              }}
-            />
+          <div className="form-container flex flex-col space-y-4 p-4 border rounded-xl">
+            <div className="flex w-full gap-2 ">
+              {" "}
+              <label htmlFor="name" className="font-semibold">
+                Name:
+              </label>
+              <input
+                placeholder="Enter User Name"
+                id="name"
+                name="name"
+                value={userName}
+                onChange={(e) => {
+                  setUserName(e.target.value);
+                }}
+                className="border px-2 rounded-lg"
+              />
+            </div>
+
             <button
               className="bg-purple text-white p-2 rounded-xl font-semibold"
               onClick={handleSubmit}
