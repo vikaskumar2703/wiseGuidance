@@ -101,14 +101,14 @@ export default function MentorCommunicationPage() {
         </div>
         <div className="col-span-3 text-center p-5 flex flex-col items-start bg-lpurple">
           <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full h-full">
-            <div className="border meeting-box bg-white ">
-              <div className="text-start p-4 bg-purple text-white font-semibold">
+            <div className="border meeting-box bg-white rounded-xl">
+              <div className="text-start p-4 bg-gradient-to-r from-pink-200 to-violet-300 rounded-t-xl text-white font-semibold">
                 Meetings With Mentor
               </div>
               <div className="flex justify-center items-center flex-col space-y-6 mt-14 ">
                 <Link
                   to={`/dashboard/meeting/${channel._id}`}
-                  className="bg-purple text-white p-4 w-48 rounded-xl font-semibold"
+                  className="bg-purple rounded-t-xl text-white p-4 w-48 rounded-xl font-semibold"
                 >
                   Join Meeting
                 </Link>{" "}
@@ -164,8 +164,8 @@ export default function MentorCommunicationPage() {
                 </form>
               </Modal>
             </div>
-            <div className="col-start-1 row-start-2 border-2 bg-white">
-              <div className="text-start p-4 bg-purple text-white font-semibold">
+            <div className="col-start-1 row-start-2 border-2 rounded-xl bg-white">
+              <div className="text-start p-4 rounded-t-xl  bg-gradient-to-r from-pink-200 to-violet-300 text-white font-semibold">
                 Goals & Tasks
               </div>
               <div className="flex  justify-between p-2 gap-4 ">
@@ -200,7 +200,7 @@ export default function MentorCommunicationPage() {
                 ))}
               </div>
             </div>
-            <div className="row-span-2 col-start-2 row-start-1 border-2 ">
+            <div className="row-span-2 col-start-2 rounded-xl row-start-1 border-2 ">
               <div className=" flex h-full ">
                 <div className="chat-area w-full rounded-xl">
                   {chatToken ? (

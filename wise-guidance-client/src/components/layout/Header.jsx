@@ -28,11 +28,12 @@ export default function Header() {
       <div className="navlinks">
         <ul className="flex items-center  space-x-10 font-sans font-bold">
           <li>
-            <NavLink to="/about">About Us</NavLink>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/resources">Resources</NavLink>
+            <NavLink to="/about">About Us</NavLink>
           </li>
+
           <li>
             <NavLink to="/blogs">Blogs</NavLink>
           </li>
