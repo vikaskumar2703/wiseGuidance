@@ -7,6 +7,8 @@ import { Link, useParams } from "react-router-dom";
 import ChatArea from "../components/Chat";
 import { Modal } from "flowbite-react";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function MentorCommunicationPage() {
   const params = useParams();
@@ -93,26 +95,30 @@ export default function MentorCommunicationPage() {
 
   return (
     <Layout title=" Dashboard">
-      <div className="grid grid-cols-4 grid-rows-1 w-full min-h-screen">
+      <div className="grid grid-cols-4 grid-rows-1 w-full h-screen">
         <div className="text-center border">
           <MentorMenu />
         </div>
         <div className="col-span-3 text-center p-5 flex flex-col items-start bg-lpurple">
           <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full h-full">
-            <div className="border border-black flex justify-center items-center flex-col space-y-6">
-              {" "}
-              <Link
-                to={`/dashboard/meeting/${channel._id}`}
-                className="bg-purple text-white p-4 w-48 rounded-xl font-semibold"
-              >
-                Join Meeting
-              </Link>{" "}
-              <Link
-                className="bg-purple text-white p-4 w-48 rounded-xl font-semibold"
-                onClick={() => setOpenModal(true)}
-              >
-                Schedule Meeting
-              </Link>
+            <div className="border meeting-box bg-white ">
+              <div className="text-start p-4 bg-purple text-white font-semibold">
+                Meetings With Mentor
+              </div>
+              <div className="flex justify-center items-center flex-col space-y-6 mt-14 ">
+                <Link
+                  to={`/dashboard/meeting/${channel._id}`}
+                  className="bg-purple text-white p-4 w-48 rounded-xl font-semibold"
+                >
+                  Join Meeting
+                </Link>{" "}
+                <Link
+                  className="bg-purple text-white p-4 w-48 rounded-xl font-semibold"
+                  onClick={() => setOpenModal(true)}
+                >
+                  Schedule Meeting
+                </Link>
+              </div>
               <Modal show={openModal} onClose={() => setOpenModal(false)}>
                 <Modal.Header>Schedule Meeting</Modal.Header>
                 <form className="space-y-2">
@@ -158,33 +164,43 @@ export default function MentorCommunicationPage() {
                 </form>
               </Modal>
             </div>
-            <div className="col-start-1 row-start-2 border border-black">
-              <div className="flex">
+            <div className="col-start-1 row-start-2 border-2 bg-white">
+              <div className="text-start p-4 bg-purple text-white font-semibold">
+                Goals & Tasks
+              </div>
+              <div className="flex  justify-between p-2 gap-4 ">
                 <input
                   onChange={(e) => {
                     setTask(e.target.value);
                   }}
                   placeholder="Enter task to do"
+                  className="flex-grow px-2 h-10 border rounded-xl"
                 />
-                <button className="p-2 bg-purple" onClick={addTask}>
-                  Add
+                <button
+                  className=" text-2xl text-purple"
+                  onClick={(e) => addTask(e)}
+                >
+                  <FontAwesomeIcon icon={faCirclePlus} />
                 </button>
               </div>
-              <div>
+              <div className=" p-2 w-full ">
                 {todos.map((t, index) => (
-                  <div key={index} className="flex">
+                  <div
+                    key={index}
+                    className="flex border-b px-2 justify-between items-center w-full"
+                  >
                     <p>{t.task}</p>
                     <button
-                      className="bg-red-600 text-white p-2"
+                      className=" text-red-600 p-2"
                       onClick={() => deleteTask(t._id)}
                     >
-                      Del
+                      <FontAwesomeIcon icon={faTrash} />
                     </button>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="row-span-2 col-start-2 row-start-1 border border-black">
+            <div className="row-span-2 col-start-2 row-start-1 border-2 ">
               <div className=" flex h-full ">
                 <div className="chat-area w-full rounded-xl">
                   {chatToken ? (
