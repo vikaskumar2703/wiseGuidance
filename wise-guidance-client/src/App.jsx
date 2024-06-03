@@ -28,6 +28,7 @@ import MentorCommunicationPage from "./pages/MentorCommunicationPage";
 import MenteeCommunicationPage from "./pages/MenteeCommunicationPage";
 import VideoChat from "./pages/VideoChat";
 import MentorMentorshipPage from "./pages/MentorMentorshipPage";
+import UpdateCoursesPage from "./pages/UpdateCoursesPage";
 
 function App() {
   return (
@@ -42,6 +43,10 @@ function App() {
             <Route path="/courses" element={<MentorRoutes />}>
               <Route path="" element={<CoursesPage />} />{" "}
               <Route path="create-course" element={<CreateCoursePage />} />
+              <Route
+                path="update-course/:courseId"
+                element={<UpdateCoursesPage />}
+              />
             </Route>
 
             <Route path="/dashboard" element={<PrivateRoutes />}>

@@ -6,7 +6,9 @@ import {
   getAllMenteesController,
   getMentorByIdController,
   getMentorsController,
+  getSingleCourse,
   getSingleMentorController,
+  updateCourseController,
 } from "../controllers/mentorController.js";
 import { isMentor, validateToken } from "../middleware/authMiddleware.js";
 
@@ -26,7 +28,16 @@ router.get("/get-mentor-id/:id", getMentorByIdController);
 
 router.post("/create-course", validateToken, isMentor, createCourseController);
 
+router.put(
+  "/update-course/:courseId",
+  validateToken,
+  isMentor,
+  updateCourseController
+);
+
 router.get("/get-courses/:mentorSlug", getAllCourses);
+
+router.get("/get-single-course/:courseId", getSingleCourse);
 
 router.get("/client-token", validateToken, braintreeTokenController);
 

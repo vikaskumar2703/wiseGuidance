@@ -76,17 +76,21 @@ export default function MenteeCommunicationPage() {
         <div className="text-center border">
           <MenteeMenu />
         </div>
-        <div className="col-span-3 text-center p-5 flex flex-col items-start">
+        <div className="col-span-3 text-center p-5 flex flex-col items-start bg-lpurple">
           <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full h-full">
-            <div className="border border-black flex justify-center items-center">
+            <div className="border rounded-xl flex flex-col space-y-7 justify-center p-10 items-center bg-white">
+              <p>
+                To join a scheduled meeting with your mentor, click on the join
+                meeting button
+              </p>
               <Link
                 to={`/dashboard/meeting/${channel._id}`}
-                className="bg-purple text-white p-2 rounded-xl font-semibold"
+                className="bg-purple text-white p-2 rounded-xl text-xl px-4 py-2 font-semibold"
               >
                 Join Meeting
               </Link>
             </div>
-            <div className="col-start-1 row-start-2 border border-black flex justify-center flex-col space-y-4">
+            <div className="col-start-1 row-start-2 border rounded-xl flex justify-center flex-col space-y-4 bg-white">
               <div className="flex justify-center">
                 <input
                   onChange={(e) => {
@@ -113,9 +117,9 @@ export default function MenteeCommunicationPage() {
               </div>
             </div>
 
-            <div className="row-span-2 col-start-2 row-start-1 border border-black">
+            <div className="row-span-2 col-start-2 row-start-1 border rounded-xl">
               <div className=" flex h-full ">
-                <div className="chat-area w-full">
+                <div className="chat-area w-full rounded-xl">
                   {chatToken ? (
                     <ChatArea
                       userObj={auth.user}

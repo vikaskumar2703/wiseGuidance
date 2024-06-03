@@ -111,6 +111,59 @@ export const createCourseController = async (req, res) => {
   }
 };
 
+// update course
+export const updateCourseController = async (req, res) => {
+  try {
+    const { courseName, mentor, mentorName, description, cost, skills, calls } =
+      req.body;
+    if (
+      !courseName ||
+      !mentor ||
+      !mentorName ||
+      !description ||
+      !skills ||
+      !cost ||
+      !calls
+    ) {
+      return res.send({ message: "All fields are mandatory!" });
+    }
+    const course = await Course.findByIdAndUpdate(
+      { _id: req.params.courseId },
+      {
+        courseName,
+        mentor,
+        mentorName,
+
+        description,
+        cost,
+        skills,
+        calls,
+      },
+      { new: true }
+    );
+    if (course) {
+      return res.status(201).send({
+        success: true,
+        message: "Course updated successfully",
+        course,
+      });
+    } else {
+      return res.status(400).send({
+        success: false,
+        message: "Error in course registration",
+        user,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: " Error in creating course",
+      error: error.message,
+    });
+  }
+};
+
 //get all courses of a mentor
 
 export const getAllCourses = async (req, res) => {
@@ -127,6 +180,26 @@ export const getAllCourses = async (req, res) => {
     return res.status(500).send({
       success: false,
       message: " Error in getting  Mentor Courses",
+      error: error.message,
+    });
+  }
+};
+
+// get single course
+export const getSingleCourse = async (req, res) => {
+  try {
+    const course = await Course.findById(req.params.courseId);
+
+    res.status(201).send({
+      success: true,
+      message: "Single courses retrieved successfully",
+      course,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: " Error in getting single Mentor Course",
       error: error.message,
     });
   }

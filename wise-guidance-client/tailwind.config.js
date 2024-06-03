@@ -8,6 +8,7 @@ export default {
       colors: {
         purple: "#7837D8",
         lpink: "#F4F3FD",
+        lpurple: "#EFEDFC",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],

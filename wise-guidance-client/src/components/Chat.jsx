@@ -1,7 +1,6 @@
 import {
   Chat,
   Channel,
-  ChannelList,
   Window,
   ChannelHeader,
   MessageList,
@@ -34,7 +33,7 @@ const ChatArea = ({ userObj, token, channelId }) => {
     });
 
     setChannel(channel);
-  }, [client]);
+  }, [client, channelId]);
 
   if (!client) return <div>Loading...</div>;
 

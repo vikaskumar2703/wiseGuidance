@@ -1,22 +1,51 @@
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHouse,
+  faUser,
+  faWallet,
+  faWrench,
+} from "@fortawesome/free-solid-svg-icons";
 
 export const MentorMenu = () => {
   return (
-    <div>
-      <h1 className="m-10 font-bold rounded-md p-5 bg-[#0E7490] text-white">
-        <NavLink to="/dashboard/mentor">Workspace</NavLink>
-      </h1>
-      <div className="admin-links flex flex-col m-10">
+    <div className="my-4">
+      <div className="admin-links flex flex-col">
         <NavLink
-          className="p-3 border border-collapse font-semibold  hover:bg-gray-300 "
+          className=" flex p-5  hover:bg-lpurple "
+          to="/dashboard/mentor"
+        >
+          <span className="mr-5">
+            <FontAwesomeIcon icon={faUser} />
+          </span>
+          Profile
+        </NavLink>
+
+        <NavLink
+          className=" flex p-5 hover:bg-lpurple "
           to="/dashboard/mentor/mentorship/"
         >
+          <span className="mr-4">
+            <FontAwesomeIcon icon={faHouse} />
+          </span>
           Mentorship
         </NavLink>
         <NavLink
-          className="p-3 border border-collapse font-semibold  hover:bg-gray-300 "
+          className="flex p-5 hover:bg-lpurple "
+          to="/dashboard/mentor/payout/"
+        >
+          <span className="mr-4">
+            <FontAwesomeIcon icon={faWallet} />
+          </span>
+          Payout{" "}
+        </NavLink>
+        <NavLink
+          className=" flex p-5 hover:bg-lpurple "
           to="/dashboard/mentor/update-profile/"
         >
+          <span className="mr-4">
+            <FontAwesomeIcon icon={faWrench} />
+          </span>
           Configure{" "}
         </NavLink>
       </div>

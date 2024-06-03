@@ -97,7 +97,7 @@ export default function MentorCommunicationPage() {
         <div className="text-center border">
           <MentorMenu />
         </div>
-        <div className="col-span-3 text-center p-5 flex flex-col items-start">
+        <div className="col-span-3 text-center p-5 flex flex-col items-start bg-lpurple">
           <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full h-full">
             <div className="border border-black flex justify-center items-center flex-col space-y-6">
               {" "}
@@ -186,7 +186,7 @@ export default function MentorCommunicationPage() {
             </div>
             <div className="row-span-2 col-start-2 row-start-1 border border-black">
               <div className=" flex h-full ">
-                <div className="chat-area w-full">
+                <div className="chat-area w-full rounded-xl">
                   {chatToken ? (
                     <ChatArea
                       userObj={auth.user}

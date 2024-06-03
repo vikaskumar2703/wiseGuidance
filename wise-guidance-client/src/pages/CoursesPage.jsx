@@ -51,7 +51,13 @@ export default function CoursesPage() {
                 <p>Calls per month: {c.calls}</p>{" "}
                 <p>Duration of course : {c.duration}</p>
               </div>
-              <button className="border p-2 rounded-lg bg-purple font-semibold text-white">
+
+              <button
+                className="border p-2 rounded-lg bg-purple font-semibold text-white"
+                onClick={() => {
+                  navigate(`update-course/${c._id}`);
+                }}
+              >
                 Update Course
               </button>
             </div>
