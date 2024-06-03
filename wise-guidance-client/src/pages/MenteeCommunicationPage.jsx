@@ -5,6 +5,8 @@ import useAuth from "../contexts/authContext";
 import axios from "axios";
 import ChatArea from "../components/Chat";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function MenteeCommunicationPage() {
   const [userId, setUserId] = useState("");
@@ -72,51 +74,66 @@ export default function MenteeCommunicationPage() {
 
   return (
     <Layout title=" Dashboard">
-      <div className="grid grid-cols-4 grid-rows-1 w-full min-h-screen">
-        <div className="text-center border">
+      <div className="grid grid-cols-4 grid-rows-1 w-full h-screen">
+        <div className="text-center ">
           <MenteeMenu />
         </div>
         <div className="col-span-3 text-center p-5 flex flex-col items-start bg-lpurple">
           <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full h-full">
-            <div className="border rounded-xl flex flex-col space-y-7 justify-center p-10 items-center bg-white">
-              <p>
-                To join a scheduled meeting with your mentor, click on the join
-                meeting button
-              </p>
-              <Link
-                to={`/dashboard/meeting/${channel._id}`}
-                className="bg-purple text-white p-2 rounded-xl text-xl px-4 py-2 font-semibold"
-              >
-                Join Meeting
-              </Link>
+            <div className="border meeting-box rounded-xl  bg-white">
+              <div className="text-start p-4 bg-gradient-to-r from-pink-200 to-violet-300 rounded-t-xl text-white font-semibold">
+                Meetings With Mentor
+              </div>
+              <div className="m-14">
+                <p cal>
+                  To join a scheduled meeting with your mentor, click on the
+                  join meeting button
+                </p>
+                <br></br>
+                <Link
+                  to={`/dashboard/meeting/${channel._id}`}
+                  className="bg-purple text-white p-2 rounded-xl px-4 py-2 font-semibold"
+                >
+                  Join Meeting
+                </Link>
+              </div>
             </div>
-            <div className="col-start-1 row-start-2 border rounded-xl flex justify-center flex-col space-y-4 bg-white">
-              <div className="flex justify-center">
+            <div className="todo-box col-start-1  row-start-2 border-2 rounded-xl bg-white">
+              <div className="text-start p-4 rounded-t-xl  bg-gradient-to-r from-pink-200 to-violet-300 text-white font-semibold">
+                Goals & Tasks
+              </div>
+              <div className="flex  justify-between p-2 gap-4 ">
                 <input
                   onChange={(e) => {
                     setTask(e.target.value);
                   }}
                   placeholder="Enter task to do"
+                  className="flex-grow px-2 h-10 border rounded-xl"
                 />
-                <button className="p-2 bg-purple" onClick={addTask}>
-                  Add
+                <button
+                  className=" text-2xl text-purple"
+                  onClick={(e) => addTask(e)}
+                >
+                  <FontAwesomeIcon icon={faCirclePlus} />
                 </button>
               </div>
-              <div className="space-y-4">
+              <div className=" p-2 w-full ">
                 {todos.map((t, index) => (
-                  <div key={index} className="flex justify-center">
-                    <p className="w-2/3">{t.task}</p>
+                  <div
+                    key={index}
+                    className="flex border-b px-2 justify-between items-center w-full"
+                  >
+                    <p>{t.task}</p>
                     <button
-                      className="bg-red-600 text-white p-2"
+                      className=" text-red-600 p-2"
                       onClick={() => deleteTask(t._id)}
                     >
-                      Del
+                      <FontAwesomeIcon icon={faTrash} />
                     </button>
                   </div>
                 ))}
               </div>
             </div>
-
             <div className="row-span-2 col-start-2 row-start-1 border rounded-xl">
               <div className=" flex h-full ">
                 <div className="chat-area w-full rounded-xl">
