@@ -95,8 +95,8 @@ export default function MentorCommunicationPage() {
 
   return (
     <Layout title=" Dashboard">
-      <div className="grid grid-cols-4 grid-rows-1 w-full h-screen">
-        <div className="text-center border">
+      <div className="grid grid-cols-4 grid-rows-1 w-full h-screen mb-14 ">
+        <div className="text-center ">
           <MentorMenu />
         </div>
         <div className="col-span-3 text-center p-5 flex flex-col items-start bg-lpurple">
