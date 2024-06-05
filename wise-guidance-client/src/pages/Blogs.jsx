@@ -1,6 +1,8 @@
 import Layout from "../components/layout/Layout";
-import blog from "../assets/blog.jpeg";
+import { blogs } from "../content/blog.jsx";
+import { useNavigate } from "react-router-dom";
 export default function BlogsPage() {
+  const navigate = useNavigate();
   return (
     <Layout title="Blogs">
       <div className="min-h-screen">
@@ -15,21 +17,23 @@ export default function BlogsPage() {
         </div>
         <div className="section p-20">
           <div className="blogs-container  grid gap-10 grid-cols-3">
-            <div className="blog-card border rounded-xl p-2 space-y-2 ">
-              <img src={blog} className="thumbnail"></img>
-              <div className="blog-info space-y-4">
-                <h1 className="blog-title text-lg font-semibold">
-                  Basics of React Framework
-                </h1>
-                <p className="text-sm w-full">
-                  React is a JavaScript library for building user interfaces
-                  with reusable components.
-                </p>
-                <p className="text-sm font-semibold">
-                  Blog By : Abhishek Jhakar
-                </p>
+            {blogs.map((b) => (
+              <div
+                className="blog-card border rounded-xl hover:border-2 p-2 space-y-2 "
+                onClick={() => {
+                  navigate(b.title);
+                }}
+              >
+                <img src={b.img} className="thumbnail h-56 "></img>
+                <div className="blog-info space-y-4">
+                  <h1 className="blog-title text-lg font-semibold">
+                    {b.title}
+                  </h1>
+                  <p className="text-sm w-full">{b.brief}</p>
+                  <p className="text-sm font-semibold">{b.author}</p>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
