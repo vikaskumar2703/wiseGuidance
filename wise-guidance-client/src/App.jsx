@@ -29,6 +29,7 @@ import MenteeCommunicationPage from "./pages/MenteeCommunicationPage";
 import VideoChat from "./pages/VideoChat";
 import MentorMentorshipPage from "./pages/MentorMentorshipPage";
 import UpdateCoursesPage from "./pages/UpdateCoursesPage";
+import MentorConfigurePage from "./pages/MentorConfigurePage";
 
 function App() {
   return (
@@ -56,6 +57,10 @@ function App() {
               <Route
                 path="mentee/mentorship"
                 element={<MenteeCommunicationPage />}
+              />
+              <Route
+                path="mentor/update-profile"
+                element={<MentorConfigurePage />}
               />
               <Route
                 path="mentor/mentorship"
