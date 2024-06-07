@@ -8,6 +8,7 @@ import {
   getMentorsController,
   getSingleCourse,
   getSingleMentorController,
+  searchMentorController,
   updateCourseController,
   updateProfileController,
 } from "../controllers/mentorController.js";
@@ -26,6 +27,8 @@ router.get("/get-mentors", getMentorsController);
 router.get("/get-mentor/:slug", getSingleMentorController);
 
 router.get("/get-mentor-id/:id", getMentorByIdController);
+
+router.get("/search/:keyword", searchMentorController);
 
 router.post("/create-course", validateToken, isMentor, createCourseController);
 

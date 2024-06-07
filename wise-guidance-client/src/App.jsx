@@ -30,82 +30,88 @@ import VideoChat from "./pages/VideoChat";
 import MentorMentorshipPage from "./pages/MentorMentorshipPage";
 import UpdateCoursesPage from "./pages/UpdateCoursesPage";
 import MentorConfigurePage from "./pages/MentorConfigurePage";
+import { SearchContextProvider } from "./contexts/searchContext";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
     <AuthContextProvider>
-      <Router>
-        <div>
-          <Routes>
-            <Route exact path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/resources" element={<ResourcesPage />} />
-            <Route path="/blogs" element={<BlogsPage />} />
-            <Route path="/courses" element={<MentorRoutes />}>
-              <Route path="" element={<CoursesPage />} />{" "}
-              <Route path="create-course" element={<CreateCoursePage />} />
-              <Route
-                path="update-course/:courseId"
-                element={<UpdateCoursesPage />}
-              />
-            </Route>
+      <SearchContextProvider>
+        <Router>
+          <div>
+            <Routes>
+              <Route exact path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/resources" element={<ResourcesPage />} />
+              <Route path="/blogs" element={<BlogsPage />} />
+              <Route path="/courses" element={<MentorRoutes />}>
+                <Route path="" element={<CoursesPage />} />{" "}
+                <Route path="create-course" element={<CreateCoursePage />} />
+                <Route
+                  path="update-course/:courseId"
+                  element={<UpdateCoursesPage />}
+                />
+              </Route>
 
-            <Route path="/dashboard" element={<PrivateRoutes />}>
-              <Route path="mentor" element={<MentorDashboardPage />} />
+              <Route path="/dashboard" element={<PrivateRoutes />}>
+                <Route path="mentor" element={<MentorDashboardPage />} />
 
-              <Route path="mentee" element={<MenteeDashboardPage />} />
-              <Route
-                path="mentee/mentorship"
-                element={<MenteeCommunicationPage />}
-              />
-              <Route
-                path="mentor/update-profile"
-                element={<MentorConfigurePage />}
-              />
-              <Route
-                path="mentor/mentorship"
-                element={<MentorMentorshipPage />}
-              />
-              <Route
-                path="mentor/mentorship/:menteeId"
-                element={<MentorCommunicationPage />}
-              />
-              <Route path="meeting/:callId" element={<VideoChat />} />
+                <Route path="mentee" element={<MenteeDashboardPage />} />
+                <Route
+                  path="mentee/mentorship"
+                  element={<MenteeCommunicationPage />}
+                />
+                <Route
+                  path="mentor/update-profile"
+                  element={<MentorConfigurePage />}
+                />
+                <Route
+                  path="mentor/mentorship"
+                  element={<MentorMentorshipPage />}
+                />
+                <Route
+                  path="mentor/mentorship/:menteeId"
+                  element={<MentorCommunicationPage />}
+                />
+                <Route path="meeting/:callId" element={<VideoChat />} />
+
+                <Route
+                  path="mentee/update-profile"
+                  element={<MenteeConfigurePage />}
+                />
+              </Route>
+              <Route path="/dashboard" element={<AdminRoutes />}>
+                <Route path="admin" element={<AdminPage />} />
+              </Route>
+              <Route path="/browse-mentors" element={<BrowseMentorsPage />} />
+              <Route path="/search" element={<SearchPage />} />
 
               <Route
-                path="mentee/update-profile"
-                element={<MenteeConfigurePage />}
+                path="/browse-mentors/:slug"
+                element={<MentorProfilePage />}
               />
-            </Route>
-            <Route path="/dashboard" element={<AdminRoutes />}>
-              <Route path="admin" element={<AdminPage />} />
-            </Route>
-            <Route path="/browse-mentors" element={<BrowseMentorsPage />} />
-            <Route
-              path="/browse-mentors/:slug"
-              element={<MentorProfilePage />}
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/mentor-apply" element={<MentorApplicationPage />} />
+
+              <Route errorElement={<ErrorPage />} />
+            </Routes>
+            <ToastContainer
+              position="top-center"
+              autoClose={1000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+              transition:Bounce
             />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/mentor-apply" element={<MentorApplicationPage />} />
-
-            <Route errorElement={<ErrorPage />} />
-          </Routes>
-          <ToastContainer
-            position="top-center"
-            autoClose={1000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-            transition:Bounce
-          />
-        </div>
-      </Router>
+          </div>
+        </Router>
+      </SearchContextProvider>
     </AuthContextProvider>
   );
 }

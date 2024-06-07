@@ -3,6 +3,7 @@ import heroImg from "../assets/heroImg.png";
 import features from "../assets/features.png";
 import BubbleBg from "../assets/BubbleBg.svg";
 import Group from "../assets/Group.png";
+import SearchInput from "../components/SearchInput";
 
 export default function HomePage() {
   return (
@@ -17,15 +18,7 @@ export default function HomePage() {
               <h3>
                 Learn a new skill, launch a project, land your dream career.
               </h3>
-              <div className="inline-block h-11 w-2/3 text-xs bg-white border-2 rounded-xl px-2">
-                <input
-                  placeholder="Search by domain skills or role"
-                  className="h-full rounded-xl w-2/3 focus:outline-none"
-                ></input>
-                <button className="bg-purple text-white px-4 ml-2 rounded-lg py-1">
-                  Find Mentors
-                </button>
-              </div>
+              <SearchInput />
             </div>
             <div className="  h-full w-[48%] py-6 image-container">
               <img src={heroImg} className="w-full "></img>

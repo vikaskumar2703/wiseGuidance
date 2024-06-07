@@ -64,10 +64,10 @@ function VideoChat() {
 
   if (!client) {
     return (
-      <>
-        <div className="container flex justify-center items-center h-screen  ">
-          <div className="form-container flex flex-col space-y-4 p-4 border rounded-xl">
-            <div className="flex w-full gap-2 ">
+      <div className="bg-lpurple">
+        <div className="container flex justify-center items-center h-screen   ">
+          <div className="form-container flex flex-col space-y-4 p-4 bg-white border rounded-xl">
+            <div className="flex w-full gap-2  ">
               {" "}
               <label htmlFor="name" className="font-semibold">
                 Name:
@@ -93,15 +93,17 @@ function VideoChat() {
             </button>
           </div>
         </div>
-      </>
+      </div>
     );
   } else {
     return (
-      <StreamVideo client={client}>
-        <StreamCall call={call}>
-          <MyUILayout />
-        </StreamCall>
-      </StreamVideo>
+      <div className="">
+        <StreamVideo client={client}>
+          <StreamCall call={call}>
+            <MyUILayout />
+          </StreamCall>
+        </StreamVideo>
+      </div>
     );
   }
 }

@@ -2,11 +2,13 @@ import Layout from "../components/layout/Layout";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import photo from "../assets/photo.png";
+import SearchInput from "../components/SearchInput";
 
 export default function BrowseMentorsPage() {
   const [mentors, setMentors] = useState([]);
+
   const navigate = useNavigate();
   const getAllMentors = async () => {
     try {
@@ -34,14 +36,8 @@ export default function BrowseMentorsPage() {
     <Layout title="Browse Mentors">
       <div className="h-full flex items-center justify-center -z-10 bg-lpink   p-14">
         <div className="w-full h-full flex flex-col items-center">
-          <div className="mb-10 rounded-xl  border-2 w-1/2 flex justify-between bg-white items-baseline">
-            <input
-              className="p-4 rounded-xl font-bold flex-grow "
-              placeholder="Search by skills"
-            />
-            <button className="px-4 p-2 rounded-xl  font-bold mx-3 bg-purple text-white">
-              Search
-            </button>
+          <div className="w-2/3 my-10 scale-y-110 flex justify-center ">
+            <SearchInput />
           </div>
           <div className="flex justify-center flex-col items-center space-y-10">
             {mentors.map((m) => (

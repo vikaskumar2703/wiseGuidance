@@ -289,3 +289,29 @@ export const updateProfileController = async (req, res) => {
     });
   }
 };
+
+// search mentor
+export const searchMentorController = async (req, res) => {
+  try {
+    const { keyword } = req.params;
+    const results = await Mentor.find({
+      $or: [
+        { skills: { $in: [keyword] } },
+        { domain: { $regex: keyword, $options: "i" } },
+      ],
+    });
+
+    res.status(201).send({
+      success: true,
+      message: "Searched Mentors listed successfully",
+      results,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error In Search Mentor API",
+      error,
+    });
+  }
+};
