@@ -9,6 +9,7 @@ import {
   getSingleCourse,
   getSingleMentorController,
   updateCourseController,
+  updateProfileController,
 } from "../controllers/mentorController.js";
 import { isMentor, validateToken } from "../middleware/authMiddleware.js";
 
@@ -40,6 +41,8 @@ router.get("/get-courses/:mentorSlug", getAllCourses);
 router.get("/get-single-course/:courseId", getSingleCourse);
 
 router.get("/client-token", validateToken, braintreeTokenController);
+
+router.put("/update-profile/:id", validateToken, updateProfileController);
 
 router.put("/checkout", validateToken, braintreePaymentController);
 

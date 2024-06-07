@@ -111,3 +111,41 @@ export const getAssignedMentor = async (req, res) => {
     });
   }
 };
+
+// update mentee profile
+export const updateMenteeProfileController = async (req, res) => {
+  try {
+    const { name, email, phone, address } = req.body;
+
+    // form validation
+    if (!name || !email || !phone || !address) {
+      return res.send({ message: "All fields are mandatory!" });
+    }
+
+    const mentee = await Mentee.findByIdAndUpdate(
+      { _id: req.params.id },
+      {
+        name,
+        email,
+        phone,
+        address,
+      },
+      {
+        new: true,
+      }
+    );
+
+    res.status(201).send({
+      success: true,
+      message: "Mentee profile updated successfully",
+      mentee,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: " Error in updating mentee profile",
+      error: error.message,
+    });
+  }
+};

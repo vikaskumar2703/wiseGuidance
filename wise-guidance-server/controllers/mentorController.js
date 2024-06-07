@@ -226,3 +226,66 @@ export const getAllMenteesController = async (req, res) => {
     });
   }
 };
+
+// update profile
+export const updateProfileController = async (req, res) => {
+  try {
+    const {
+      name,
+      email,
+      phone,
+      domain,
+      description,
+      organisation,
+      skills,
+      designation,
+      experience,
+    } = req.body;
+
+    // form validation
+    if (
+      !name ||
+      !email ||
+      !phone ||
+      !domain ||
+      !description ||
+      !organisation ||
+      !skills ||
+      !designation ||
+      !experience
+    ) {
+      return res.send({ message: "All fields are mandatory!" });
+    }
+
+    const mentor = await Mentor.findByIdAndUpdate(
+      { _id: req.params.id },
+      {
+        name,
+        email,
+        phone,
+        domain,
+        description,
+        organisation,
+        skills,
+        designation,
+        experience,
+      },
+      {
+        new: true,
+      }
+    );
+
+    res.status(201).send({
+      success: true,
+      message: "Mentor profile updated successfully",
+      mentor,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: " Error in getting  updating mentor profile",
+      error: error.message,
+    });
+  }
+};

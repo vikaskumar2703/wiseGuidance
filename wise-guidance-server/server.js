@@ -23,6 +23,8 @@ connectDb();
 // router middleware
 app.use("/api/auth", authRoutes);
 app.use("/api/mentorship/mentor", mentorRoutes);
+app.use("/api/mentorship/mentee", menteeRoutes);
+
 app.use("/api/communication", channelRoutes);
 
 app.get("/", (req, res) => {

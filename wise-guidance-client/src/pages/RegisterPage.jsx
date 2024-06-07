@@ -1,4 +1,3 @@
-import Layout from "../components/layout/Layout";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";

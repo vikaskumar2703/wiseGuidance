@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Layout from "../components/layout/Layout";
 import { MentorMenu } from "../components/layout/MentorMenu";
 import useAuth from "../contexts/authContext";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export default function MentorConfigurePage() {
@@ -12,13 +13,55 @@ export default function MentorConfigurePage() {
   const [skills, setSkills] = useState(auth.user.skills);
   const [designation, setDesignation] = useState(auth.user.designation);
   const [description, setDescription] = useState(auth.user.description);
-
   const [experience, setExperience] = useState(auth.user.experience);
   const [skill, setSkill] = useState("");
   const [domain, setDomain] = useState(auth.user.domain);
   const [name, setName] = useState(auth.user.name);
   const [phone, setPhone] = useState(auth.user.phone);
   const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.put(
+        `${
+          import.meta.env.VITE_REACT_APP_API
+        }/api/mentorship/mentor/update-profile/${auth.user._id}`,
+        {
+          name,
+          email,
+          phone,
+          domain,
+          description,
+          organisation,
+          skills,
+          designation,
+          experience,
+        }
+      );
+      if (res.data.success) {
+        toast.success(res.data.message);
+        setAuth({
+          ...auth,
+          user: res.data.mentor,
+        });
+        localStorage.setItem(
+          "auth",
+          JSON.stringify({
+            ...auth,
+            user: res.data.mentor,
+          })
+        );
+
+        navigate(-1);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
     <Layout title="Mentor Dashboard">
@@ -31,7 +74,7 @@ export default function MentorConfigurePage() {
             <h1 className=" text-3xl font-bold">Update Profile</h1>
             <form
               className="register-form flex flex-col font-semibold space-y-4 items-start"
-              // onSubmit={handleSubmit}
+              onSubmit={handleSubmit}
             >
               <label htmlFor="name" className="">
                 Name :{" "}

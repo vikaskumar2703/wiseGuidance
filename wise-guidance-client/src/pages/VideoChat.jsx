@@ -11,6 +11,7 @@ import {
   ParticipantView,
   CallControls,
   SpeakerLayout,
+  PaginatedGridLayout,
 } from "@stream-io/video-react-sdk";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { useNavigate, useParams } from "react-router-dom";
@@ -64,7 +65,7 @@ function VideoChat() {
   if (!client) {
     return (
       <>
-        <div className="container flex justify-center items-center h-screen ">
+        <div className="container flex justify-center items-center h-screen  ">
           <div className="form-container flex flex-col space-y-4 p-4 border rounded-xl">
             <div className="flex w-full gap-2 ">
               {" "}
@@ -120,15 +121,20 @@ export const MyUILayout = () => {
   const remoteParticipants = useRemoteParticipants();
 
   if (callingState !== CallingState.JOINED) {
-    return <div>Loading...</div>;
+    return <div>Joining Meeting ...</div>;
   }
 
   return (
     <StreamTheme>
       {/* <MyParticipantList participants={remoteParticipants} /> */}
       {/* <MyFloatingLocalParticipant participant={localParticipant} /> */}
-      <SpeakerLayout participantsBarPosition="bottom" />
-      <CallControls onLeave={() => navigate(-1)} />
+      <div className="flex justify-center mt-14">
+        {" "}
+        <PaginatedGridLayout participantsBarPosition="bottom" />
+      </div>
+      <div>
+        <CallControls onLeave={() => navigate(-1)} />
+      </div>
     </StreamTheme>
   );
 };
