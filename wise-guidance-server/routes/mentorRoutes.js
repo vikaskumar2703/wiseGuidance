@@ -1,5 +1,4 @@
 import express from "express";
-import formidable from "express-formidable";
 import {
   createCourseController,
   getAllCourses,
@@ -11,6 +10,7 @@ import {
   searchMentorController,
   updateCourseController,
   updateProfileController,
+  mentorPhotoController,
 } from "../controllers/mentorController.js";
 import { isMentor, validateToken } from "../middleware/authMiddleware.js";
 
@@ -18,6 +18,7 @@ import {
   braintreePaymentController,
   braintreeTokenController,
 } from "../controllers/menteeController.js";
+import formidable from "express-formidable";
 
 const router = express.Router();
 
@@ -27,6 +28,8 @@ router.get("/get-mentors", getMentorsController);
 router.get("/get-mentor/:slug", getSingleMentorController);
 
 router.get("/get-mentor-id/:id", getMentorByIdController);
+
+router.get("/mentor-photo/:mid", mentorPhotoController);
 
 router.get("/search/:keyword", searchMentorController);
 
@@ -45,7 +48,12 @@ router.get("/get-single-course/:courseId", getSingleCourse);
 
 router.get("/client-token", validateToken, braintreeTokenController);
 
-router.put("/update-profile/:id", validateToken, updateProfileController);
+router.put(
+  "/update-profile/:id",
+  validateToken,
+  formidable(),
+  updateProfileController
+);
 
 router.put("/checkout", validateToken, braintreePaymentController);
 

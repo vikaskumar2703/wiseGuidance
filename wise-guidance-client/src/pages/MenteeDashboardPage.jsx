@@ -57,7 +57,9 @@ export default function MenteeDashboardPage() {
             >
               <div className="bg-gradient-to-b from-purple w-full to-pink-100 h-28 rounded-t-xl "></div>
               <img
-                src={girl}
+                src={`${
+                  import.meta.env.VITE_REACT_APP_API
+                }/api/mentorship/mentor/mentor-photo/${mentor._id}`}
                 className="h-24 w-24 absolute top-14 right-16 rounded-full "
               />
               <h2 className="text-center font-semibold mt-14">{mentor.name}</h2>

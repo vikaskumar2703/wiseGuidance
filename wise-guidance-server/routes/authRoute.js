@@ -14,10 +14,11 @@ import {
 } from "../middleware/authMiddleware.js";
 //Create a router object ; It provides a way to group related routes together and define middleware for those routes separately
 const router = express.Router();
+import formidable from "express-formidable";
 
 //register-routes
 router.post("/mentee-register", MenteeRegisterController);
-router.post("/mentor-register", MentorRegisterController);
+router.post("/mentor-register", formidable(), MentorRegisterController);
 //login routes
 router.post("/mentee-login", MenteeLoginController);
 router.post("/mentor-login", MentorLoginController);

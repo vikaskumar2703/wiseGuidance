@@ -1,6 +1,8 @@
 import Mentee from "../models/menteeModels.js";
 import slugify from "slugify";
+import formidable from "express-formidable";
 
+import fs from "fs";
 import Mentor from "../models/mentorModel.js";
 import jwt from "jsonwebtoken";
 import { hashPassword, comparePassword } from "../utils/authUtils.js";
@@ -71,8 +73,9 @@ export const MentorRegisterController = async (req, res) => {
       skills,
       designation,
       experience,
-    } = req.body;
+    } = req.fields;
 
+    const { photo } = req.files;
     // Validate fields in user input
     if (
       !name ||
@@ -85,9 +88,13 @@ export const MentorRegisterController = async (req, res) => {
       !organisation ||
       !skills ||
       !designation ||
-      !experience
+      !experience ||
+      !photo
     ) {
       return res.send({ message: "All fields are mandatory!" });
+    }
+    if (photo.size > 1000000) {
+      return res.status(500).send({ error: "photo should be less then 1mb" });
     }
     // Check for an existing user
     const existingUser = await Mentor.findOne({ email });
@@ -98,38 +105,27 @@ export const MentorRegisterController = async (req, res) => {
       });
     }
     const hashedPassword = await hashPassword(password);
-    const user = await Mentor.create({
-      name,
-      email,
+    const user = new Mentor({
+      ...req.fields,
       password: hashedPassword,
-      phone,
-      domain,
-      description,
       slug: slugify(name),
-      answer,
-      organisation,
-      skills,
-      designation,
-      experience,
     });
-    if (user) {
-      return res.status(201).send({
-        success: true,
-        message: "Mentor registered successfully",
-        user,
-      });
-    } else {
-      return res.status(400).send({
-        success: true,
-        message: "Mentor registered successfully",
-        user,
-      });
+    if (photo) {
+      user.photo.data = fs.readFileSync(photo.path);
+      user.photo.contentType = photo.type;
     }
+    await user.save();
+
+    return res.status(201).send({
+      success: true,
+      message: "Mentor registered successfully",
+      user,
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).send({
       success: false,
-      message: " Error in registration",
+      message: " Error in Mentor registration",
       error,
     });
   }

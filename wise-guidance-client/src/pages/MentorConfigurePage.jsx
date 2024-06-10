@@ -18,26 +18,30 @@ export default function MentorConfigurePage() {
   const [domain, setDomain] = useState(auth.user.domain);
   const [name, setName] = useState(auth.user.name);
   const [phone, setPhone] = useState(auth.user.phone);
+  const [photo, setPhoto] = useState();
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const mentorData = new FormData();
+      mentorData.append("name", name);
+      mentorData.append("email", email);
+      mentorData.append("phone", phone);
+      mentorData.append("domain", domain);
+
+      mentorData.append("description", description);
+      mentorData.append("organisation", organisation);
+      mentorData.append("skills", skills);
+      mentorData.append("photo", photo);
+      mentorData.append("designation", designation);
+      mentorData.append("experience", experience);
       const res = await axios.put(
         `${
           import.meta.env.VITE_REACT_APP_API
         }/api/mentorship/mentor/update-profile/${auth.user._id}`,
-        {
-          name,
-          email,
-          phone,
-          domain,
-          description,
-          organisation,
-          skills,
-          designation,
-          experience,
-        }
+        mentorData
       );
       if (res.data.success) {
         toast.success(res.data.message);
@@ -88,6 +92,38 @@ export default function MentorConfigurePage() {
                   name="name"
                 ></input>
               </label>
+              {photo ? (
+                ""
+              ) : (
+                <img
+                  src={`${
+                    import.meta.env.VITE_REACT_APP_API
+                  }/api/mentorship/mentor/mentor-photo/${auth.user._id}`}
+                  className="h-40 w-36 "
+                ></img>
+              )}{" "}
+              <label htmlFor="photo" className="mt-3">
+                {photo ? photo.name : "Upload Photo"}
+              </label>
+              <div className="">
+                {photo && (
+                  <div className="text-center">
+                    <img
+                      src={URL.createObjectURL(photo)}
+                      alt="product_photo"
+                      height={"200px"}
+                      className="img img-responsive"
+                    />
+                  </div>
+                )}
+              </div>
+              <input
+                type="file"
+                name="photo"
+                className="mt-2 rounded-xl border"
+                accept="image/*"
+                onChange={(e) => setPhoto(e.target.files[0])}
+              />
               <label htmlFor="email" className="">
                 Email :{" "}
                 <input

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import photo from "../assets/photo.png";
 import SearchInput from "../components/SearchInput";
 
 export default function BrowseMentorsPage() {
@@ -46,7 +45,12 @@ export default function BrowseMentorsPage() {
                 key={m._id}
               >
                 <div className="mr-10  ">
-                  <img src={photo} className="min-h-72 min-w-36"></img>
+                  <img
+                    src={`${
+                      import.meta.env.VITE_REACT_APP_API
+                    }/api/mentorship/mentor/mentor-photo/${m._id}`}
+                    className="min-h-72 min-w-36"
+                  ></img>
                 </div>
                 <div className="space-y-2 flex col-span-3 flex-col justify-between">
                   <h1 className="font-bold text-2xl">{m.name}</h1>

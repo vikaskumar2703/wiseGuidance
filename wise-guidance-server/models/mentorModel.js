@@ -21,6 +21,7 @@ const MentorSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
     phone: {
       type: String,
       required: true,
@@ -60,6 +61,10 @@ const MentorSchema = new mongoose.Schema(
     answer: {
       type: String,
       required: true,
+    },
+    photo: {
+      data: "Buffer",
+      contentType: String,
     },
   },
   { timestamps: true }

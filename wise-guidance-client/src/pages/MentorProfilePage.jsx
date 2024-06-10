@@ -11,20 +11,6 @@ import { Flowbite } from "flowbite-react";
 import photo from "../assets/photo.png";
 import review from "../assets/review.png";
 
-const customTheme = {
-  button: {
-    styles: {
-      fullWidth: {
-        base: "ml-0 flex w-full rounded-none first:ml-0",
-        active: {
-          on: "active rounded-none bg-black  text-gray-900 dark:bg-gray-700 dark:text-white",
-          off: "rounded-none bg-white hover:bg-gray-50 hover:text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white",
-        },
-      },
-    },
-  },
-};
-
 export default function MentorProfilePage() {
   const params = useParams();
   const [mentor, setMentor] = useState({});
@@ -121,7 +107,12 @@ export default function MentorProfilePage() {
           <div className="gradient bg-gradient-to-r from-[#D3BAF4] to-[#FFD9F3] h-1/3 rounded-t-xl"></div>
 
           <div className="flex flex-col  absolute top-[100px] left-14  space-y-4">
-            <img src={photo} className="h-40 w-36 "></img>
+            <img
+              src={`${
+                import.meta.env.VITE_REACT_APP_API
+              }/api/mentorship/mentor/mentor-photo/${mentor._id}`}
+              className="h-40 w-36 "
+            ></img>
             <h1 className="text-xl font-bold mb-4  ">{mentor.name}</h1>
             <p className="font-semibold">
               {mentor.designation} at {mentor.organisation}

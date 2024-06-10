@@ -15,7 +15,7 @@ export default function MentorApplicationPage() {
   const [skills, setSkills] = useState([]);
   const [designation, setDesignation] = useState("");
   const [description, setDescription] = useState("");
-
+  const [photo, setPhoto] = useState("");
   const [experience, setExperience] = useState("");
   const [skill, setSkill] = useState("");
   const [domain, setDomain] = useState("");
@@ -24,21 +24,24 @@ export default function MentorApplicationPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const mentorData = new FormData();
+      mentorData.append("name", name);
+      mentorData.append("email", email);
+      mentorData.append("password", password);
+      mentorData.append("phone", phone);
+      mentorData.append("domain", domain);
+      mentorData.append("answer", answer);
+
+      mentorData.append("description", description);
+      mentorData.append("organisation", organisation);
+      mentorData.append("skills", skills);
+      mentorData.append("photo", photo);
+      mentorData.append("designation", designation);
+      mentorData.append("experience", experience);
+
       const res = await axios.post(
         `${import.meta.env.VITE_REACT_APP_API}/api/auth/mentor-register`,
-        {
-          name,
-          email,
-          password,
-          phone,
-          domain,
-          answer,
-          description,
-          organisation,
-          skills,
-          designation,
-          experience,
-        }
+        mentorData
       );
       if (res.data.success) {
         toast.success(res.data.message);
@@ -70,6 +73,29 @@ export default function MentorApplicationPage() {
               id="name"
               name="name"
             ></input>
+            <label htmlFor="photo" className="mt-3">
+              {photo ? photo.name : "Upload Photo"}
+            </label>
+            <div className="">
+              {photo && (
+                <div className="text-center">
+                  <img
+                    src={URL.createObjectURL(photo)}
+                    alt="product_photo"
+                    height={"200px"}
+                    className="img img-responsive"
+                  />
+                </div>
+              )}
+            </div>
+            <input
+              type="file"
+              name="photo"
+              className="mt-2 rounded-xl border"
+              accept="image/*"
+              onChange={(e) => setPhoto(e.target.files[0])}
+            />
+
             <label htmlFor="email" className="mt-3">
               Email
             </label>

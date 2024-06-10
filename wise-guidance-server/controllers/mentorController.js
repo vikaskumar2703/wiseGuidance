@@ -1,6 +1,7 @@
 import Mentor from "../models/mentorModel.js";
 import Course from "../models/courseModels.js";
 import slugify from "slugify";
+import fs from "fs";
 
 // get all mentors
 export const getMentorsController = async (req, res) => {
@@ -240,7 +241,8 @@ export const updateProfileController = async (req, res) => {
       skills,
       designation,
       experience,
-    } = req.body;
+    } = req.fields;
+    const { photo } = req.files;
 
     // form validation
     if (
@@ -257,24 +259,22 @@ export const updateProfileController = async (req, res) => {
       return res.send({ message: "All fields are mandatory!" });
     }
 
+    if (photo.size > 1000000) {
+      return res.status(500).send({ error: "photo should be less then 1mb" });
+    }
+
     const mentor = await Mentor.findByIdAndUpdate(
       { _id: req.params.id },
-      {
-        name,
-        email,
-        phone,
-        domain,
-        description,
-        organisation,
-        skills,
-        designation,
-        experience,
-      },
+      { ...req.fields },
       {
         new: true,
       }
     );
-
+    if (photo) {
+      mentor.photo.data = fs.readFileSync(photo.path);
+      mentor.photo.contentType = photo.type;
+    }
+    await mentor.save();
     res.status(201).send({
       success: true,
       message: "Mentor profile updated successfully",
@@ -311,6 +311,24 @@ export const searchMentorController = async (req, res) => {
     res.status(400).send({
       success: false,
       message: "Error In Search Mentor API",
+      error,
+    });
+  }
+};
+
+// // get photo
+export const mentorPhotoController = async (req, res) => {
+  try {
+    const mentor = await Mentor.findById(req.params.mid).select("photo");
+    if (mentor.photo.data) {
+      res.set("Content-type", mentor.photo.contentType);
+      return res.status(200).send(mentor.photo.data);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Erorr while getting photo",
       error,
     });
   }
